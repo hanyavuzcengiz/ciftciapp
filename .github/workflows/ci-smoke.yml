@@ -58,8 +58,8 @@ jobs:
           docker compose ps
           exit 1
 
-      - name: Run DB migrations
-        run: pnpm db:migrate:all
+      - name: Run listing DB migration for smoke
+        run: pnpm db:listing:migrate
 
       - name: Start services in background
         run: nohup env GATEWAY_PROMETHEUS_METRICS=1 pnpm dev:services > /tmp/dev-services.log 2>&1 &
