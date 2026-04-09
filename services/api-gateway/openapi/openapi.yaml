@@ -1,0 +1,91 @@
+openapi: 3.1.0
+info:
+  title: AgroMarket API
+  version: 1.0.0
+servers:
+  - url: https://api.agromarket.local
+paths:
+  /health: { get: { summary: API gateway liveness (no auth) } }
+  /metrics: { get: { summary: Prometheus text metrics (only when GATEWAY_PROMETHEUS_METRICS=1; restrict in prod) } }
+  /api/v1/auth/health: { get: { summary: User service health via auth path (no auth; not auth rate-limited) } }
+  /api/v1/auth/send-otp: { post: { summary: Send SMS OTP, responses: { "202": { description: Accepted } } } }
+  /api/v1/auth/verify-otp: { post: { summary: Verify OTP, responses: { "200": { description: Tokens issued } } } }
+  /api/v1/auth/refresh-token: { post: { summary: Rotate refresh token, responses: { "200": { description: Refreshed } } } }
+  /api/v1/auth/logout: { post: { summary: Logout, responses: { "204": { description: Logged out } } } }
+  /api/v1/auth/register-complete: { post: { summary: Complete profile, responses: { "200": { description: Profile completed } } } }
+  /api/v1/users/health: { get: { summary: User service health (no auth) } }
+  /api/v1/users/me: { get: { summary: Get current user }, put: { summary: Update current user } }
+  /api/v1/users/me/photo: { post: { summary: Upload profile photo } }
+  /api/v1/users/{userId}: { get: { summary: Public user profile } }
+  /api/v1/users/{userId}/listings: { get: { summary: Active listings by user } }
+  /api/v1/users/{userId}/reviews: { get: { summary: User reviews } }
+  /api/v1/verifications/health: { get: { summary: User service health via verifications path (no auth) } }
+  /api/v1/verifications/phone: { post: { summary: Phone verification } }
+  /api/v1/verifications/national-id: { post: { summary: National ID verification } }
+  /api/v1/verifications/tax-number: { post: { summary: Tax number verification } }
+  /api/v1/verifications/agricultural-id: { post: { summary: Agricultural registry upload } }
+  /api/v1/listings/health: { get: { summary: Listing service health (no auth) } }
+  /api/v1/listing-categories/health: { get: { summary: Listing service health via categories path (no auth) } }
+  /api/v1/listings: { get: { summary: List listings }, post: { summary: Create listing draft } }
+  /api/v1/listings/{id}: { get: { summary: Listing detail }, put: { summary: Update listing }, delete: { summary: Archive listing } }
+  /api/v1/listings/{id}/publish: { post: { summary: Publish listing } }
+  /api/v1/listings/{id}/media: { post: { summary: Upload listing media } }
+  /api/v1/listings/{id}/media/{mediaId}: { delete: { summary: Delete listing media } }
+  /api/v1/listings/{id}/favorite: { post: { summary: Toggle favorite } }
+  /api/v1/listings/{id}/report: { post: { summary: Report listing } }
+  /api/v1/offers/health: { get: { summary: Offer service health (no auth) } }
+  /api/v1/offers: { post: { summary: Create offer } }
+  /api/v1/offers/received: { get: { summary: Received offers } }
+  /api/v1/offers/sent: { get: { summary: Sent offers } }
+  /api/v1/offers/{id}: { get: { summary: Offer detail } }
+  /api/v1/offers/{id}/accept: { put: { summary: Accept offer } }
+  /api/v1/offers/{id}/reject: { put: { summary: Reject offer } }
+  /api/v1/offers/{id}/counter: { put: { summary: Counter offer } }
+  /api/v1/conversations/health: { get: { summary: Messaging service health (no auth) } }
+  /api/v1/conversations: { get: { summary: List conversations }, post: { summary: Start conversation } }
+  /api/v1/conversations/{id}/messages: { get: { summary: Cursor-paginated messages }, post: { summary: Send message } }
+  /api/v1/conversations/{id}/messages/{msgId}: { delete: { summary: Delete message } }
+  /api/v1/search/health: { get: { summary: Search service health (no auth) } }
+  /api/v1/search/listings: { get: { summary: Advanced listing search } }
+  /api/v1/reviews/health: { get: { summary: User service health via reviews path (no auth) } }
+  /api/v1/reviews: { post: { summary: Create review } }
+  /api/v1/reviews/user/{userId}: { get: { summary: User reviews list } }
+  /api/v1/reviews/{id}/reply: { put: { summary: Seller reply } }
+  /api/v1/notifications/health: { get: { summary: Notification service health (no auth) } }
+  /api/v1/notifications: { post: { summary: Enqueue notification } }
+  /api/v1/notifications/{userId}: { get: { summary: User notification history } }
+  /api/v1/payments/health: { get: { summary: Payment service health (no auth) } }
+  /api/v1/payments-secure/health: { get: { summary: Payment service health via secure path (no auth, no HMAC) } }
+  /api/v1/payments/intent: { post: { summary: Create payment intent } }
+  /api/v1/payments/{id}/confirm: { post: { summary: Confirm payment } }
+  /api/v1/payments/{id}/refund: { post: { summary: Refund payment } }
+  /api/v1/admin/health: { get: { summary: Admin service health (no auth) } }
+  /api/v1/admin/stats: { get: { summary: Admin dashboard stats } }
+  /api/v1/admin/reports: { get: { summary: List moderation reports } }
+  /api/v1/admin/reports/{id}: { put: { summary: Update report status } }
+  /api/v1/admin/audit-logs: { get: { summary: Immutable audit log } }
+  /api/v1/admin/users/{id}/ban: { post: { summary: Ban user } }
+  /api/v1/admin/disputes: { post: { summary: Open dispute record } }
+  /api/v1/admin/disputes/{id}/resolve: { put: { summary: Resolve dispute } }
+  /api/v1/ai/health: { get: { summary: AI service health (no auth) } }
+  /api/v1/ai/price-suggestion: { post: { summary: AI price band } }
+  /api/v1/ai/moderate-content: { post: { summary: AI text moderation score } }
+  /api/v1/ai/recommendations: { post: { summary: Personalized listing recommendations } }
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ErrorMessage:
+      type: object
+      properties:
+        message: { type: string }
+
+tags:
+  - name: auth
+    description: Public OTP ve token uçları (JWT gerektirmez, Bearer döner).
+  - name: listings
+    description: GET herkese açık; POST/PUT/DELETE ve mutasyonlar gateway üzerinde JWT ister.
