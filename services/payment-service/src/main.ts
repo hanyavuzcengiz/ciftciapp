@@ -4,7 +4,7 @@ import express, { type NextFunction, type Request, type Response } from "express
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import { z } from "zod";
-import { InMemoryIdempotencyStore } from "./idempotencyStore";
+import { InMemoryIdempotencyReplayStore, InMemoryIdempotencyStore } from "./idempotencyStore";
 import { MockPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
 import { validatePaymentRuntime } from "./runtimeConfig";
 import { isWebhookTimestampFresh, resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
@@ -80,7 +80,17 @@ let seq = 1;
 const intents = new Map<string, PaymentIntent>();
 const intentByProviderPaymentId = new Map<string, string>();
 const idempotency = new InMemoryIdempotencyStore();
+const requestIdempotency = new InMemoryIdempotencyReplayStore();
 const adapter = new MockPaymentProviderAdapter();
+
+function readIdempotencyKey(req: Request): string | null {
+  const key = String(req.header("x-idempotency-key") ?? "").trim();
+  return key.length > 0 ? key : null;
+}
+
+function stableFingerprint(input: unknown): string {
+  return crypto.createHash("sha256").update(JSON.stringify(input)).digest("hex");
+}
 
 app.get("/health", (_req: Request, res: Response) => {
   res.json({
@@ -95,6 +105,25 @@ app.post("/payments/intent", async (req: Request, res: Response) => {
   const parsed = createIntentSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ message: "Invalid body", errors: parsed.error.flatten() });
   const userId = String(req.header("x-user-id") ?? "anonymous");
+  const idempotencyKey = readIdempotencyKey(req);
+  const intentFingerprint = stableFingerprint({
+    orderId: parsed.data.order_id,
+    userId,
+    provider: parsed.data.provider,
+    amount: parsed.data.amount
+  });
+
+  if (idempotencyKey) {
+    const replayKey = `intent:${userId}:${idempotencyKey}`;
+    const probe = requestIdempotency.probe(replayKey, intentFingerprint);
+    if (probe.kind === "replay") {
+      return res.status(probe.record.statusCode).json(probe.record.body);
+    }
+    if (probe.kind === "conflict") {
+      return res.status(409).json({ message: "Idempotency key already used with different request payload" });
+    }
+  }
+
   const providerIntent = await adapter.createIntent({
     orderId: parsed.data.order_id,
     userId,
@@ -113,23 +142,74 @@ app.post("/payments/intent", async (req: Request, res: Response) => {
   };
   intents.set(intent.id, intent);
   intentByProviderPaymentId.set(intent.providerPaymentId, intent.id);
+  if (idempotencyKey) {
+    requestIdempotency.remember(`intent:${userId}:${idempotencyKey}`, {
+      fingerprint: intentFingerprint,
+      statusCode: 201,
+      body: intent
+    });
+  }
   return res.status(201).json(intent);
 });
 
 app.post("/payments/:id/confirm", async (req: Request, res: Response) => {
   const intent = intents.get(req.params.id);
   if (!intent) return res.status(404).json({ message: "Payment intent not found" });
+  const idempotencyKey = readIdempotencyKey(req);
+  const confirmFingerprint = stableFingerprint({ id: req.params.id, operation: "confirm" });
+
+  if (idempotencyKey) {
+    const replayKey = `confirm:${req.params.id}:${idempotencyKey}`;
+    const probe = requestIdempotency.probe(replayKey, confirmFingerprint);
+    if (probe.kind === "replay") {
+      return res.status(probe.record.statusCode).json(probe.record.body);
+    }
+    if (probe.kind === "conflict") {
+      return res.status(409).json({ message: "Idempotency key already used with different request payload" });
+    }
+  }
+
   const next = await adapter.confirm(intent.provider, intent.providerPaymentId);
   intent.status = next.status;
-  return res.json({ id: intent.id, status: intent.status });
+  const responseBody = { id: intent.id, status: intent.status };
+  if (idempotencyKey) {
+    requestIdempotency.remember(`confirm:${req.params.id}:${idempotencyKey}`, {
+      fingerprint: confirmFingerprint,
+      statusCode: 200,
+      body: responseBody
+    });
+  }
+  return res.json(responseBody);
 });
 
 app.post("/payments/:id/refund", async (req: Request, res: Response) => {
   const intent = intents.get(req.params.id);
   if (!intent) return res.status(404).json({ message: "Payment intent not found" });
+  const idempotencyKey = readIdempotencyKey(req);
+  const refundFingerprint = stableFingerprint({ id: req.params.id, operation: "refund" });
+
+  if (idempotencyKey) {
+    const replayKey = `refund:${req.params.id}:${idempotencyKey}`;
+    const probe = requestIdempotency.probe(replayKey, refundFingerprint);
+    if (probe.kind === "replay") {
+      return res.status(probe.record.statusCode).json(probe.record.body);
+    }
+    if (probe.kind === "conflict") {
+      return res.status(409).json({ message: "Idempotency key already used with different request payload" });
+    }
+  }
+
   const next = await adapter.refund(intent.provider, intent.providerPaymentId);
   intent.status = next.status;
-  return res.json({ id: intent.id, status: intent.status });
+  const responseBody = { id: intent.id, status: intent.status };
+  if (idempotencyKey) {
+    requestIdempotency.remember(`refund:${req.params.id}:${idempotencyKey}`, {
+      fingerprint: refundFingerprint,
+      statusCode: 200,
+      body: responseBody
+    });
+  }
+  return res.json(responseBody);
 });
 
 app.post("/payments/webhook/:provider", (req: Request, res: Response) => {
