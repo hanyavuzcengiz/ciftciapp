@@ -7,7 +7,12 @@ import { z } from "zod";
 import { parseIdempotencyKeyHeader } from "./idempotencyKey";
 import { InMemoryIdempotencyReplayStore, InMemoryIdempotencyStore } from "./idempotencyStore";
 import { createPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
-import { buildReconciliationReport } from "./reconciliation";
+import {
+  buildReconciliationAlertEvent,
+  buildReconciliationReport,
+  shouldRaiseReconciliationAlert,
+  type ReconciliationReport
+} from "./reconciliation";
 import { validatePaymentRuntime } from "./runtimeConfig";
 import { isWebhookTimestampFresh, resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
 
@@ -80,6 +85,10 @@ const reconciliationAlertRatio = Math.min(
   Math.max(0, Number(process.env.PAYMENT_RECONCILIATION_ALERT_RATIO ?? 0.05) || 0.05)
 );
 const reconciliationToken = String(process.env.PAYMENT_RECONCILIATION_TOKEN ?? "").trim();
+const reconciliationAlertWebhookUrl = String(process.env.PAYMENT_RECONCILIATION_ALERT_WEBHOOK_URL ?? "").trim();
+const reconciliationSourceUrl = String(process.env.PAYMENT_RECONCILIATION_SOURCE_URL ?? "").trim();
+const reconciliationSourceToken = String(process.env.PAYMENT_RECONCILIATION_SOURCE_TOKEN ?? "").trim();
+const reconciliationScheduleMs = Math.max(0, Number(process.env.PAYMENT_RECONCILIATION_SCHEDULE_MS ?? 0) || 0);
 
 const createIntentSchema = z.object({
   order_id: z.string().min(1),
@@ -101,6 +110,13 @@ const intentByProviderPaymentId = new Map<string, string>();
 const idempotency = new InMemoryIdempotencyStore();
 const requestIdempotency = new InMemoryIdempotencyReplayStore();
 const adapter = createPaymentProviderAdapter(process.env);
+let lastReconciliationRunAt: string | null = null;
+let lastReconciliationSummary: {
+  comparedCount: number;
+  mismatchCount: number;
+  mismatchRatio: number;
+  alertRaised: boolean;
+} | null = null;
 
 function readIdempotencyKey(req: Request, res: Response): string | null | undefined {
   const parsed = parseIdempotencyKeyHeader(req.header("x-idempotency-key"), idempotencyKeyMaxLength);
@@ -113,6 +129,59 @@ function readIdempotencyKey(req: Request, res: Response): string | null | undefi
 
 function stableFingerprint(input: unknown): string {
   return crypto.createHash("sha256").update(JSON.stringify(input)).digest("hex");
+}
+
+function buildCurrentReconciliationReport(
+  providerRecords: Array<{ provider: "iyzico" | "stripe"; payment_id: string; status: PaymentStatus }>
+): ReconciliationReport {
+  return buildReconciliationReport(
+    [...intents.values()].map((intent) => ({
+      intentId: intent.id,
+      provider: intent.provider,
+      providerPaymentId: intent.providerPaymentId,
+      status: intent.status
+    })),
+    providerRecords.map((record) => ({
+      provider: record.provider,
+      paymentId: record.payment_id,
+      status: record.status
+    }))
+  );
+}
+
+async function emitReconciliationAlert(report: ReconciliationReport): Promise<void> {
+  const payload = buildReconciliationAlertEvent(report, reconciliationAlertRatio);
+  console.error(JSON.stringify(payload));
+
+  if (!reconciliationAlertWebhookUrl) return;
+  try {
+    const res = await fetch(reconciliationAlertWebhookUrl, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      console.error(
+        JSON.stringify({
+          ts: new Date().toISOString(),
+          svc: "payment-service",
+          level: "error",
+          event: "reconciliation_alert_webhook_failed",
+          status: res.status
+        })
+      );
+    }
+  } catch (error) {
+    console.error(
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        svc: "payment-service",
+        level: "error",
+        event: "reconciliation_alert_webhook_failed",
+        error: error instanceof Error ? error.message : String(error)
+      })
+    );
+  }
 }
 
 app.get("/health", (_req: Request, res: Response) => {
@@ -276,7 +345,7 @@ app.post("/payments/webhook/:provider", (req: Request, res: Response) => {
   return res.json({ ok: true, applied: true, id: intent.id, status: intent.status });
 });
 
-app.post("/payments/reconciliation/report", (req: Request, res: Response) => {
+app.post("/payments/reconciliation/report", async (req: Request, res: Response) => {
   if (reconciliationToken) {
     const incoming = String(req.header("x-reconciliation-token") ?? "").trim();
     if (!incoming || incoming !== reconciliationToken) {
@@ -289,34 +358,19 @@ app.post("/payments/reconciliation/report", (req: Request, res: Response) => {
     return res.status(400).json({ message: "Invalid body", errors: parsed.error.flatten() });
   }
 
-  const report = buildReconciliationReport(
-    [...intents.values()].map((intent) => ({
-      intentId: intent.id,
-      provider: intent.provider,
-      providerPaymentId: intent.providerPaymentId,
-      status: intent.status
-    })),
-    parsed.data.records.map((record) => ({
-      provider: record.provider,
-      paymentId: record.payment_id,
-      status: record.status
-    }))
-  );
-
-  const alertRaised = report.mismatchRatio >= reconciliationAlertRatio && report.comparedCount > 0;
+  const report = buildCurrentReconciliationReport(parsed.data.records);
+  const alertRaised = shouldRaiseReconciliationAlert(report, reconciliationAlertRatio);
   if (alertRaised) {
-    console.error(
-      JSON.stringify({
-        ts: new Date().toISOString(),
-        svc: "payment-service",
-        level: "error",
-        event: "reconciliation_mismatch_alert",
-        comparedCount: report.comparedCount,
-        mismatchCount: report.mismatchCount,
-        mismatchRatio: report.mismatchRatio
-      })
-    );
+    await emitReconciliationAlert(report);
   }
+
+  lastReconciliationRunAt = new Date().toISOString();
+  lastReconciliationSummary = {
+    comparedCount: report.comparedCount,
+    mismatchCount: report.mismatchCount,
+    mismatchRatio: report.mismatchRatio,
+    alertRaised
+  };
 
   return res.json({
     ok: true,
@@ -325,6 +379,68 @@ app.post("/payments/reconciliation/report", (req: Request, res: Response) => {
     ...report
   });
 });
+
+app.get("/payments/reconciliation/health", (_req: Request, res: Response) => {
+  res.json({
+    ok: true,
+    schedulerEnabled: reconciliationScheduleMs > 0 && Boolean(reconciliationSourceUrl),
+    scheduleMs: reconciliationScheduleMs,
+    sourceConfigured: Boolean(reconciliationSourceUrl),
+    tokenProtectedSource: Boolean(reconciliationSourceToken),
+    tokenProtectedReportEndpoint: Boolean(reconciliationToken),
+    alertWebhookConfigured: Boolean(reconciliationAlertWebhookUrl),
+    lastReconciliationRunAt,
+    lastReconciliationSummary
+  });
+});
+
+async function runScheduledReconciliation(): Promise<void> {
+  if (!reconciliationSourceUrl) return;
+  try {
+    const response = await fetch(reconciliationSourceUrl, {
+      method: "GET",
+      headers: reconciliationSourceToken ? { "x-reconciliation-token": reconciliationSourceToken } : undefined
+    });
+    if (!response.ok) {
+      throw new Error(`reconciliation source responded with status ${response.status}`);
+    }
+    const body = (await response.json()) as unknown;
+    const parsed = reconciliationSchema.safeParse(body);
+    if (!parsed.success) {
+      throw new Error("reconciliation source payload validation failed");
+    }
+
+    const report = buildCurrentReconciliationReport(parsed.data.records);
+    const alertRaised = shouldRaiseReconciliationAlert(report, reconciliationAlertRatio);
+    if (alertRaised) {
+      await emitReconciliationAlert(report);
+    }
+
+    lastReconciliationRunAt = new Date().toISOString();
+    lastReconciliationSummary = {
+      comparedCount: report.comparedCount,
+      mismatchCount: report.mismatchCount,
+      mismatchRatio: report.mismatchRatio,
+      alertRaised
+    };
+  } catch (error) {
+    console.error(
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        svc: "payment-service",
+        level: "error",
+        event: "reconciliation_scheduler_failed",
+        error: error instanceof Error ? error.message : String(error)
+      })
+    );
+  }
+}
+
+if (reconciliationScheduleMs > 0 && reconciliationSourceUrl) {
+  setInterval(() => {
+    void runScheduledReconciliation();
+  }, reconciliationScheduleMs);
+}
 
 app.listen(3007, () => {
   console.log("payment-service listening on 3007");
