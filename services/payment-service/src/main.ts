@@ -68,11 +68,12 @@ app.use(rateLimit({ windowMs: 60 * 1000, limit: 100 }));
 
 const isProd = process.env.NODE_ENV === "production";
 const allowInMemory = process.env.PAYMENT_ALLOW_INMEMORY === "true";
-validatePaymentRuntime(process.env.NODE_ENV, allowInMemory);
+const providerMode = String(process.env.PAYMENT_PROVIDER_MODE ?? "mock").trim().toLowerCase();
+const allowMockProviderInProd = String(process.env.PAYMENT_ALLOW_MOCK_PROVIDER_IN_PROD ?? "").trim() === "1";
+validatePaymentRuntime(process.env.NODE_ENV, allowInMemory, providerMode, allowMockProviderInProd);
 const webhookSecret = resolveWebhookSecret(process.env.NODE_ENV, process.env.REQUEST_SIGNING_SECRET);
 const webhookToleranceSeconds = Math.max(30, Number(process.env.PAYMENT_WEBHOOK_TOLERANCE_SECONDS ?? 300) || 300);
 const idempotencyKeyMaxLength = Math.max(32, Number(process.env.PAYMENT_IDEMPOTENCY_KEY_MAX_LENGTH ?? 128) || 128);
-const providerMode = String(process.env.PAYMENT_PROVIDER_MODE ?? "mock").trim().toLowerCase();
 
 const createIntentSchema = z.object({
   order_id: z.string().min(1),
