@@ -4,6 +4,7 @@ const SUMMARY_PATH = process.env.GITHUB_STEP_SUMMARY;
 if (!SUMMARY_PATH) process.exit(0);
 
 const warnMs = Math.max(1, Number(process.env.SMOKE_SLOW_CHECK_WARN_MS || 5000));
+const failOnSlow = String(process.env.SMOKE_FAIL_ON_SLOW_CHECKS || "").toLowerCase() === "true";
 const metricsEnabled = String(process.env.SMOKE_METRICS_ENABLED || "").toLowerCase() === "true";
 
 const files = [
@@ -25,8 +26,11 @@ function p95(rows) {
 let out = "## Smoke Summary\n\n";
 out += `- metrics smoke: ${metricsEnabled ? "enabled" : "disabled"}\n`;
 out += `- slow check warning threshold: ${warnMs}ms\n\n`;
+out += `- fail on slow checks: ${failOnSlow ? "enabled" : "disabled"}\n\n`;
 out += "| Profile | OK | Failed | Checks | Total Wall (ms) | P95 (ms) | Max (ms) | API Base |\n";
 out += "|---|---:|---:|---:|---:|---:|---:|---|\n";
+
+const sloBreaches = [];
 
 for (const [label, path] of files) {
   if (!fs.existsSync(path)) {
@@ -70,10 +74,25 @@ for (const [label, path] of files) {
     const over = rows.filter((r) => r.durationMs >= warnMs).sort((a, b) => b.durationMs - a.durationMs);
     if (over.length) {
       out += `> WARNING: ${label} has ${over.length} check(s) >= ${warnMs}ms. Slowest: ${over[0].name || "unknown"} (${over[0].durationMs}ms)\n\n`;
+      if (failOnSlow) {
+        sloBreaches.push({ label, overCount: over.length, slowest: over[0] });
+      }
     }
   } catch {
     out += `| ${label} | parse-error | n/a | n/a | n/a | n/a | n/a | n/a |\n`;
   }
 }
 
+if (failOnSlow && sloBreaches.length) {
+  out += "## SLO Gate\n\n";
+  for (const b of sloBreaches) {
+    out += `- ${b.label}: ${b.overCount} check(s) >= ${warnMs}ms (slowest: ${b.slowest.name || "unknown"} ${b.slowest.durationMs}ms)\n`;
+  }
+  out += "\n";
+}
+
 fs.appendFileSync(SUMMARY_PATH, out);
+
+if (failOnSlow && sloBreaches.length) {
+  process.exitCode = 1;
+}

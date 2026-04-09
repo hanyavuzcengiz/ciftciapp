@@ -68,6 +68,7 @@ Tek tek servis çalıştırmak için: `pnpm --filter @agromarket/api-gateway dev
 - CI workflow: `.github/workflows/ci-smoke.yml`
   - `workflow_dispatch` input `enable_metrics_smoke` (default `true`)
   - `workflow_dispatch` input `slow_check_warn_ms` (default `5000`)
+  - `workflow_dispatch` input `fail_on_slow_checks` (default `false`) — aciksa threshold asiminda job fail olur
   - Job summary'de: profil bazlı OK/failed/check sayısı, ilk hatalar (`hint` ile), en yavaş 3 check ve latency warning satırı
 
 ## Git line endings
