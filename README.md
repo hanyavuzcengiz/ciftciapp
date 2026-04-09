@@ -70,6 +70,12 @@ Tek tek servis çalıştırmak için: `pnpm --filter @agromarket/api-gateway dev
   - `workflow_dispatch` input `slow_check_warn_ms` (default `5000`)
   - Job summary'de: profil bazlı OK/failed/check sayısı, ilk hatalar (`hint` ile), en yavaş 3 check ve latency warning satırı
 
+## Git line endings
+
+- Repo `.gitattributes` ile metin dosyalarini varsayilan olarak `LF` normalize eder.
+- Windows script dosyalari (`.ps1`, `.bat`, `.cmd`) bilerek `CRLF` tutulur.
+- Gorsel/PDF gibi binary dosyalar text donusumunden korunur.
+
 ## Docker
 
 `docker-compose.yml`: PostgreSQL (PostGIS), Redis, MongoDB, Elasticsearch, RabbitMQ, Kafka (Zookeeper), **ai-python** (FastAPI, 8010 → 8000), isteğe bağlı **listing-service** (Prisma migrate + API, yalnızca `127.0.0.1:3002`).
