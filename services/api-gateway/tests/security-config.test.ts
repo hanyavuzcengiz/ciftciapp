@@ -21,6 +21,17 @@ test("requires non-dev secrets in production", () => {
   );
 });
 
+test("requires all mandatory secrets in production", () => {
+  assert.throws(
+    () =>
+      resolveSecurityEnv("production", {
+        JWT_SECRET: "super-strong-secret",
+        ADMIN_API_KEY: "admin-key-prod-123"
+      }),
+    /Missing required env: REQUEST_SIGNING_SECRET/
+  );
+});
+
 test("accepts explicit secure production config", () => {
   const cfg = resolveSecurityEnv("production", {
     JWT_SECRET: "super-strong-secret",
