@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import { z } from "zod";
 import { validatePaymentRuntime } from "./runtimeConfig";
+import { resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
 
 type PaymentStatus = "pending" | "paid" | "failed" | "refunded";
 type PaymentIntent = {
@@ -65,15 +66,23 @@ app.use(rateLimit({ windowMs: 60 * 1000, limit: 100 }));
 const isProd = process.env.NODE_ENV === "production";
 const allowInMemory = process.env.PAYMENT_ALLOW_INMEMORY === "true";
 validatePaymentRuntime(process.env.NODE_ENV, allowInMemory);
+const webhookSecret = resolveWebhookSecret(process.env.NODE_ENV, process.env.REQUEST_SIGNING_SECRET);
 
 const createIntentSchema = z.object({
   order_id: z.string().min(1),
   provider: z.enum(["iyzico", "stripe"]),
   amount: z.number().positive()
 });
+const webhookSchema = z.object({
+  event: z.enum(["payment.paid", "payment.failed", "payment.refunded"]),
+  payment_id: z.string().min(1),
+  order_id: z.string().min(1).optional(),
+  amount: z.number().positive().optional()
+});
 
 let seq = 1;
 const intents = new Map<string, PaymentIntent>();
+const seenWebhookIds = new Set<string>();
 
 app.get("/health", (_req: Request, res: Response) => {
   res.json({
@@ -113,6 +122,42 @@ app.post("/payments/:id/refund", (req: Request, res: Response) => {
   if (!intent) return res.status(404).json({ message: "Payment intent not found" });
   intent.status = "refunded";
   return res.json({ id: intent.id, status: intent.status });
+});
+
+app.post("/payments/webhook/:provider", (req: Request, res: Response) => {
+  const provider = req.params.provider;
+  if (provider !== "iyzico" && provider !== "stripe") {
+    return res.status(404).json({ message: "Unknown provider" });
+  }
+
+  const webhookId = String(req.header("x-webhook-id") ?? "").trim();
+  const signature = String(req.header("x-signature") ?? "").trim();
+  const timestamp = String(req.header("x-timestamp") ?? "").trim();
+  if (!webhookId || !signature || !timestamp) {
+    return res.status(401).json({ message: "Missing webhook signature headers" });
+  }
+
+  if (!verifyWebhookSignature(signature, timestamp, req.body, webhookSecret)) {
+    return res.status(401).json({ message: "Invalid webhook signature" });
+  }
+
+  if (seenWebhookIds.has(webhookId)) {
+    return res.json({ ok: true, duplicate: true });
+  }
+  seenWebhookIds.add(webhookId);
+
+  const parsed = webhookSchema.safeParse(req.body);
+  if (!parsed.success) return res.status(400).json({ message: "Invalid webhook body", errors: parsed.error.flatten() });
+
+  const intent = intents.get(parsed.data.payment_id);
+  if (!intent) {
+    return res.status(202).json({ ok: true, applied: false, reason: "payment intent not found" });
+  }
+
+  if (parsed.data.event === "payment.paid") intent.status = "paid";
+  if (parsed.data.event === "payment.failed") intent.status = "failed";
+  if (parsed.data.event === "payment.refunded") intent.status = "refunded";
+  return res.json({ ok: true, applied: true, id: intent.id, status: intent.status });
 });
 
 app.listen(3007, () => {
