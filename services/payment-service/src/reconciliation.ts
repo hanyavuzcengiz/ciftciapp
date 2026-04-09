@@ -29,6 +29,17 @@ export type ReconciliationReport = {
   mismatches: ReconciliationMismatch[];
 };
 
+export type ReconciliationAlertEvent = {
+  ts: string;
+  svc: "payment-service";
+  level: "error";
+  event: "reconciliation_mismatch_alert";
+  comparedCount: number;
+  mismatchCount: number;
+  mismatchRatio: number;
+  alertRatioThreshold: number;
+};
+
 export function buildReconciliationReport(
   locals: ReconciliationLocalRecord[],
   providers: ReconciliationProviderRecord[]
@@ -69,4 +80,24 @@ export function buildReconciliationReport(
   const mismatchCount = mismatches.length;
   const mismatchRatio = comparedCount > 0 ? mismatchCount / comparedCount : 0;
   return { comparedCount, mismatchCount, mismatchRatio, mismatches };
+}
+
+export function shouldRaiseReconciliationAlert(report: ReconciliationReport, threshold: number): boolean {
+  return report.comparedCount > 0 && report.mismatchRatio >= threshold;
+}
+
+export function buildReconciliationAlertEvent(
+  report: ReconciliationReport,
+  threshold: number
+): ReconciliationAlertEvent {
+  return {
+    ts: new Date().toISOString(),
+    svc: "payment-service",
+    level: "error",
+    event: "reconciliation_mismatch_alert",
+    comparedCount: report.comparedCount,
+    mismatchCount: report.mismatchCount,
+    mismatchRatio: report.mismatchRatio,
+    alertRatioThreshold: threshold
+  };
 }
