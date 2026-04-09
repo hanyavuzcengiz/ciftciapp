@@ -33,6 +33,7 @@ Türkiye tarım ve hayvancılık odaklı, mikroservis tabanlı mobil pazaryeri i
 - `REDIS_URL` tanımlıysa refresh token rotasyonu Redis üzerinde saklanır; yoksa bellek içi store kullanılır.
 - `CORS_ORIGINS`: virgülle ayrılmış origin listesi; `*` tüm originlere izin verir (yalnızca geliştirme). Varsayılan Expo + `http://localhost:8081`.
 - `LISTING_SERVICE_URL`: `search-service` Elasticsearch kullanmıyorsa ilan verisini bu URL’den çeker (varsayılan `http://127.0.0.1:3002`).
+- `PAYMENT_PROVIDER_MODE`: `mock` (default) veya `live`; `live` modda ilgili sağlayıcı için `PAYMENT_IYZICO_*` / `PAYMENT_STRIPE_*` değişkenleri birlikte verilmelidir.
 - `LISTING_DATABASE_URL`: **listing-service** Prisma bağlantısı (genelde `DATABASE_URL` ile aynı veritabanı; tablolar `listings_app`, `listing_favorites`).
 - **İlan migration sırası:** Önce `services/user-service/prisma/migrations/0001_init` ile `users` tablosu oluşmalı; sonra listing-service migrasyonları (`author_uuid` FK için). `ELASTICSEARCH_URL` tanılıysa yayınlanan ilanlar `listings` indeksine yazılır / pasif olunca silinir.
 - **User-service + Postgres:** `DATABASE_URL` tanılıysa OTP doğrulaması `users` satırı oluşturur/günceller (`phone_verified`); `POST /api/v1/auth/register-complete` **Bearer JWT** ister ve ad / `user_type` yazar. `DATABASE_URL` yoksa auth yine çalışır, sadece kalıcı kullanıcı kaydı atlanır.
