@@ -4,12 +4,14 @@ import express, { type NextFunction, type Request, type Response } from "express
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import { z } from "zod";
+import { InMemoryIdempotencyStore } from "./idempotencyStore";
+import { MockPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
 import { validatePaymentRuntime } from "./runtimeConfig";
 import { resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
 
-type PaymentStatus = "pending" | "paid" | "failed" | "refunded";
 type PaymentIntent = {
   id: string;
+  providerPaymentId: string;
   orderId: string;
   userId: string;
   provider: "iyzico" | "stripe";
@@ -73,16 +75,11 @@ const createIntentSchema = z.object({
   provider: z.enum(["iyzico", "stripe"]),
   amount: z.number().positive()
 });
-const webhookSchema = z.object({
-  event: z.enum(["payment.paid", "payment.failed", "payment.refunded"]),
-  payment_id: z.string().min(1),
-  order_id: z.string().min(1).optional(),
-  amount: z.number().positive().optional()
-});
-
 let seq = 1;
 const intents = new Map<string, PaymentIntent>();
-const seenWebhookIds = new Set<string>();
+const intentByProviderPaymentId = new Map<string, string>();
+const idempotency = new InMemoryIdempotencyStore();
+const adapter = new MockPaymentProviderAdapter();
 
 app.get("/health", (_req: Request, res: Response) => {
   res.json({
@@ -93,12 +90,19 @@ app.get("/health", (_req: Request, res: Response) => {
   });
 });
 
-app.post("/payments/intent", (req: Request, res: Response) => {
+app.post("/payments/intent", async (req: Request, res: Response) => {
   const parsed = createIntentSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ message: "Invalid body", errors: parsed.error.flatten() });
   const userId = String(req.header("x-user-id") ?? "anonymous");
+  const providerIntent = await adapter.createIntent({
+    orderId: parsed.data.order_id,
+    userId,
+    provider: parsed.data.provider,
+    amount: parsed.data.amount
+  });
   const intent: PaymentIntent = {
     id: `pay_${seq++}`,
+    providerPaymentId: providerIntent.providerPaymentId,
     orderId: parsed.data.order_id,
     userId,
     provider: parsed.data.provider,
@@ -107,20 +111,23 @@ app.post("/payments/intent", (req: Request, res: Response) => {
     createdAt: new Date().toISOString()
   };
   intents.set(intent.id, intent);
+  intentByProviderPaymentId.set(intent.providerPaymentId, intent.id);
   return res.status(201).json(intent);
 });
 
-app.post("/payments/:id/confirm", (req: Request, res: Response) => {
+app.post("/payments/:id/confirm", async (req: Request, res: Response) => {
   const intent = intents.get(req.params.id);
   if (!intent) return res.status(404).json({ message: "Payment intent not found" });
-  intent.status = "paid";
+  const next = await adapter.confirm(intent.provider, intent.providerPaymentId);
+  intent.status = next.status;
   return res.json({ id: intent.id, status: intent.status });
 });
 
-app.post("/payments/:id/refund", (req: Request, res: Response) => {
+app.post("/payments/:id/refund", async (req: Request, res: Response) => {
   const intent = intents.get(req.params.id);
   if (!intent) return res.status(404).json({ message: "Payment intent not found" });
-  intent.status = "refunded";
+  const next = await adapter.refund(intent.provider, intent.providerPaymentId);
+  intent.status = next.status;
   return res.json({ id: intent.id, status: intent.status });
 });
 
@@ -141,22 +148,20 @@ app.post("/payments/webhook/:provider", (req: Request, res: Response) => {
     return res.status(401).json({ message: "Invalid webhook signature" });
   }
 
-  if (seenWebhookIds.has(webhookId)) {
+  if (!idempotency.remember(`webhook:${provider}:${webhookId}`)) {
     return res.json({ ok: true, duplicate: true });
   }
-  seenWebhookIds.add(webhookId);
 
-  const parsed = webhookSchema.safeParse(req.body);
-  if (!parsed.success) return res.status(400).json({ message: "Invalid webhook body", errors: parsed.error.flatten() });
+  const mapped = adapter.mapWebhookEvent(provider, req.body);
+  if (!mapped) return res.status(400).json({ message: "Unsupported webhook payload" });
 
-  const intent = intents.get(parsed.data.payment_id);
+  const localId = intentByProviderPaymentId.get(mapped.paymentId);
+  const intent = localId ? intents.get(localId) : null;
   if (!intent) {
     return res.status(202).json({ ok: true, applied: false, reason: "payment intent not found" });
   }
 
-  if (parsed.data.event === "payment.paid") intent.status = "paid";
-  if (parsed.data.event === "payment.failed") intent.status = "failed";
-  if (parsed.data.event === "payment.refunded") intent.status = "refunded";
+  intent.status = mapped.status;
   return res.json({ ok: true, applied: true, id: intent.id, status: intent.status });
 });
 
