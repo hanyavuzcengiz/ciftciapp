@@ -6,7 +6,7 @@ import helmet from "helmet";
 import { z } from "zod";
 import { parseIdempotencyKeyHeader } from "./idempotencyKey";
 import { InMemoryIdempotencyReplayStore, InMemoryIdempotencyStore } from "./idempotencyStore";
-import { MockPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
+import { createPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
 import { validatePaymentRuntime } from "./runtimeConfig";
 import { isWebhookTimestampFresh, resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
 
@@ -72,6 +72,7 @@ validatePaymentRuntime(process.env.NODE_ENV, allowInMemory);
 const webhookSecret = resolveWebhookSecret(process.env.NODE_ENV, process.env.REQUEST_SIGNING_SECRET);
 const webhookToleranceSeconds = Math.max(30, Number(process.env.PAYMENT_WEBHOOK_TOLERANCE_SECONDS ?? 300) || 300);
 const idempotencyKeyMaxLength = Math.max(32, Number(process.env.PAYMENT_IDEMPOTENCY_KEY_MAX_LENGTH ?? 128) || 128);
+const providerMode = String(process.env.PAYMENT_PROVIDER_MODE ?? "mock").trim().toLowerCase();
 
 const createIntentSchema = z.object({
   order_id: z.string().min(1),
@@ -83,7 +84,7 @@ const intents = new Map<string, PaymentIntent>();
 const intentByProviderPaymentId = new Map<string, string>();
 const idempotency = new InMemoryIdempotencyStore();
 const requestIdempotency = new InMemoryIdempotencyReplayStore();
-const adapter = new MockPaymentProviderAdapter();
+const adapter = createPaymentProviderAdapter(process.env);
 
 function readIdempotencyKey(req: Request, res: Response): string | null | undefined {
   const parsed = parseIdempotencyKeyHeader(req.header("x-idempotency-key"), idempotencyKeyMaxLength);
@@ -103,7 +104,8 @@ app.get("/health", (_req: Request, res: Response) => {
     ok: true,
     service: "payment-service",
     inMemory: allowInMemory && !isProd,
-    persistentBackendRequired: isProd
+    persistentBackendRequired: isProd,
+    providerMode
   });
 });
 
