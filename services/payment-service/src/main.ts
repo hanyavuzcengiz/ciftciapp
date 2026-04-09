@@ -79,7 +79,8 @@ app.get("/health", (_req: Request, res: Response) => {
   res.json({
     ok: true,
     service: "payment-service",
-    inMemory: allowInMemory && !isProd
+    inMemory: allowInMemory && !isProd,
+    persistentBackendRequired: isProd
   });
 });
 

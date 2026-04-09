@@ -101,7 +101,7 @@ async function deliverPushIfNeeded(row: Notification, userId: string): Promise<v
     ? await pgListPushTokensForUser(userId)
     : [...(pushTokens.get(userId) ?? [])];
   if (tokens.length === 0) return;
-  await sendExpoPushMessages(
+  const result = await sendExpoPushMessages(
     tokens.map((to) => ({
       to,
       sound: "default" as const,
@@ -114,6 +114,21 @@ async function deliverPushIfNeeded(row: Notification, userId: string): Promise<v
       }
     }))
   );
+  if (!result.ok || result.ticketErrorCount > 0 || result.retryScheduled) {
+    console.warn(
+      "notification-service: push delivery diagnostic",
+      JSON.stringify({
+        userId,
+        notificationId: row.id,
+        tokenCount: tokens.length,
+        attempts: result.attempts,
+        ok: result.ok,
+        httpStatus: result.httpStatus,
+        ticketErrorCount: result.ticketErrorCount,
+        retryScheduled: result.retryScheduled
+      })
+    );
+  }
 }
 
 app.get("/health", (_req: Request, res: Response) =>
