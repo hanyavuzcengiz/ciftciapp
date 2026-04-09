@@ -7,6 +7,7 @@ import { z } from "zod";
 import { parseIdempotencyKeyHeader } from "./idempotencyKey";
 import { InMemoryIdempotencyReplayStore, InMemoryIdempotencyStore } from "./idempotencyStore";
 import { createPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
+import { buildReconciliationReport } from "./reconciliation";
 import { validatePaymentRuntime } from "./runtimeConfig";
 import { isWebhookTimestampFresh, resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
 
@@ -74,11 +75,25 @@ validatePaymentRuntime(process.env.NODE_ENV, allowInMemory, providerMode, allowM
 const webhookSecret = resolveWebhookSecret(process.env.NODE_ENV, process.env.REQUEST_SIGNING_SECRET);
 const webhookToleranceSeconds = Math.max(30, Number(process.env.PAYMENT_WEBHOOK_TOLERANCE_SECONDS ?? 300) || 300);
 const idempotencyKeyMaxLength = Math.max(32, Number(process.env.PAYMENT_IDEMPOTENCY_KEY_MAX_LENGTH ?? 128) || 128);
+const reconciliationAlertRatio = Math.min(
+  1,
+  Math.max(0, Number(process.env.PAYMENT_RECONCILIATION_ALERT_RATIO ?? 0.05) || 0.05)
+);
+const reconciliationToken = String(process.env.PAYMENT_RECONCILIATION_TOKEN ?? "").trim();
 
 const createIntentSchema = z.object({
   order_id: z.string().min(1),
   provider: z.enum(["iyzico", "stripe"]),
   amount: z.number().positive()
+});
+const reconciliationSchema = z.object({
+  records: z.array(
+    z.object({
+      provider: z.enum(["iyzico", "stripe"]),
+      payment_id: z.string().min(1),
+      status: z.enum(["pending", "paid", "failed", "refunded"])
+    })
+  )
 });
 let seq = 1;
 const intents = new Map<string, PaymentIntent>();
@@ -259,6 +274,56 @@ app.post("/payments/webhook/:provider", (req: Request, res: Response) => {
 
   intent.status = mapped.status;
   return res.json({ ok: true, applied: true, id: intent.id, status: intent.status });
+});
+
+app.post("/payments/reconciliation/report", (req: Request, res: Response) => {
+  if (reconciliationToken) {
+    const incoming = String(req.header("x-reconciliation-token") ?? "").trim();
+    if (!incoming || incoming !== reconciliationToken) {
+      return res.status(401).json({ message: "Invalid reconciliation token" });
+    }
+  }
+
+  const parsed = reconciliationSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json({ message: "Invalid body", errors: parsed.error.flatten() });
+  }
+
+  const report = buildReconciliationReport(
+    [...intents.values()].map((intent) => ({
+      intentId: intent.id,
+      provider: intent.provider,
+      providerPaymentId: intent.providerPaymentId,
+      status: intent.status
+    })),
+    parsed.data.records.map((record) => ({
+      provider: record.provider,
+      paymentId: record.payment_id,
+      status: record.status
+    }))
+  );
+
+  const alertRaised = report.mismatchRatio >= reconciliationAlertRatio && report.comparedCount > 0;
+  if (alertRaised) {
+    console.error(
+      JSON.stringify({
+        ts: new Date().toISOString(),
+        svc: "payment-service",
+        level: "error",
+        event: "reconciliation_mismatch_alert",
+        comparedCount: report.comparedCount,
+        mismatchCount: report.mismatchCount,
+        mismatchRatio: report.mismatchRatio
+      })
+    );
+  }
+
+  return res.json({
+    ok: true,
+    alertRaised,
+    alertRatioThreshold: reconciliationAlertRatio,
+    ...report
+  });
 });
 
 app.listen(3007, () => {
