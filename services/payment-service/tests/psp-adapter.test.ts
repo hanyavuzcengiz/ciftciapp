@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createPaymentProviderAdapter, MockPaymentProviderAdapter, resolvePaymentAdapterConfig } from "../src/pspAdapter";
+import {
+  createPaymentProviderAdapter,
+  MockPaymentProviderAdapter,
+  parseProviderIntentId,
+  parseProviderStatus,
+  resolvePaymentAdapterConfig
+} from "../src/pspAdapter";
 
 test("maps iyzico webhook payload into canonical status", () => {
   const adapter = new MockPaymentProviderAdapter();
@@ -49,4 +55,22 @@ test("resolvePaymentAdapterConfig normalizes base url and timeout", () => {
 test("createPaymentProviderAdapter defaults to mock mode", () => {
   const adapter = createPaymentProviderAdapter({});
   assert.equal(adapter instanceof MockPaymentProviderAdapter, true);
+});
+
+test("parseProviderIntentId supports provider specific response shapes", () => {
+  assert.equal(parseProviderIntentId("iyzico", { paymentId: "iyzi-123" }), "iyzi-123");
+  assert.equal(parseProviderIntentId("stripe", { id: "pi_123" }), "pi_123");
+  assert.equal(parseProviderIntentId("stripe", { payment_intent: { id: "pi_nested" } }), "pi_nested");
+});
+
+test("parseProviderStatus maps iyzico statuses", () => {
+  assert.equal(parseProviderStatus("iyzico", { paymentStatus: "success" }), "paid");
+  assert.equal(parseProviderStatus("iyzico", { paymentStatus: "failure" }), "failed");
+  assert.equal(parseProviderStatus("iyzico", { paymentStatus: "pending" }), "pending");
+});
+
+test("parseProviderStatus maps stripe statuses", () => {
+  assert.equal(parseProviderStatus("stripe", { payment_status: "succeeded" }), "paid");
+  assert.equal(parseProviderStatus("stripe", { payment_status: "canceled" }), "failed");
+  assert.equal(parseProviderStatus("stripe", { charge: { status: "refunded" } }), "refunded");
 });

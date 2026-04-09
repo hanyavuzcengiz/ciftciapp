@@ -56,6 +56,62 @@ function readString(obj: Record<string, unknown>, key: string): string {
   return typeof value === "string" ? value : "";
 }
 
+function readNestedString(obj: Record<string, unknown>, path: string[]): string {
+  let cursor: unknown = obj;
+  for (const key of path) {
+    const asObj = asRecord(cursor);
+    if (!asObj) return "";
+    cursor = asObj[key];
+  }
+  return typeof cursor === "string" ? cursor : "";
+}
+
+const IYZICO_STATUS_MAP: Record<string, PaymentStatus> = {
+  success: "paid",
+  failure: "failed",
+  pending: "pending",
+  refunded: "refunded"
+};
+
+const STRIPE_STATUS_MAP: Record<string, PaymentStatus> = {
+  succeeded: "paid",
+  failed: "failed",
+  pending: "pending",
+  canceled: "failed",
+  refunded: "refunded"
+};
+
+export function parseProviderIntentId(provider: PaymentProvider, body: Record<string, unknown>): string {
+  if (provider === "iyzico") {
+    return (
+      readString(body, "provider_payment_id") ||
+      readString(body, "paymentId") ||
+      readString(body, "payment_id")
+    );
+  }
+
+  return (
+    readString(body, "provider_payment_id") ||
+    readString(body, "id") ||
+    readNestedString(body, ["payment_intent", "id"])
+  );
+}
+
+export function parseProviderStatus(provider: PaymentProvider, body: Record<string, unknown>): PaymentStatus | null {
+  const direct = asStatus(body.status);
+  if (direct) return direct;
+
+  if (provider === "iyzico") {
+    const raw = (readString(body, "paymentStatus") || readString(body, "status")).toLowerCase();
+    return IYZICO_STATUS_MAP[raw] ?? null;
+  }
+
+  const raw =
+    (readString(body, "payment_status") || readString(body, "status") || readNestedString(body, ["charge", "status"]))
+      .toLowerCase();
+  return STRIPE_STATUS_MAP[raw] ?? null;
+}
+
 async function parseResponseBody(res: Response): Promise<Record<string, unknown>> {
   const body = (await res.json()) as unknown;
   const obj = asRecord(body);
@@ -142,21 +198,21 @@ export class HttpPaymentProviderAdapter implements PaymentProviderAdapter {
       user_id: input.userId,
       amount: input.amount
     });
-    const providerPaymentId = readString(body, "provider_payment_id");
+    const providerPaymentId = parseProviderIntentId(input.provider, body);
     if (!providerPaymentId) throw new Error(`Provider ${input.provider} did not return provider_payment_id`);
     return { providerPaymentId };
   }
 
   async confirm(provider: PaymentProvider, providerPaymentId: string): Promise<{ status: PaymentStatus }> {
     const body = await this.post(provider, `/payments/${providerPaymentId}/confirm`, {});
-    const status = asStatus(body.status);
+    const status = parseProviderStatus(provider, body);
     if (!status) throw new Error(`Provider ${provider} did not return valid status on confirm`);
     return { status };
   }
 
   async refund(provider: PaymentProvider, providerPaymentId: string): Promise<{ status: PaymentStatus }> {
     const body = await this.post(provider, `/payments/${providerPaymentId}/refund`, {});
-    const status = asStatus(body.status);
+    const status = parseProviderStatus(provider, body);
     if (!status) throw new Error(`Provider ${provider} did not return valid status on refund`);
     return { status };
   }
