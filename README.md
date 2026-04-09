@@ -94,3 +94,7 @@ Python AI: `services/ai-service/python` — `Dockerfile` + `requirements.txt`.
 ## Üretim öncesi
 
 Gerçek ortamda: token iptal listesi / JWKS, NVI/GİB entegrasyonları, ilan tablosunun ana şema (`listings` / kullanıcı UUID) ile hizalanması, Elasticsearch indeks yönetimi, Prometheus/Grafana ve düzgün E2E (Detox) / yük (k6) senaryoları eklenmelidir.
+
+## Tasarım backlog
+
+- UI/UX önceliklendirilmiş iş listesi: `docs/ui-ux-backlog.md`
