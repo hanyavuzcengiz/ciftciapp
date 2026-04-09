@@ -4,6 +4,7 @@ import express, { type NextFunction, type Request, type Response } from "express
 import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import { z } from "zod";
+import { parseIdempotencyKeyHeader } from "./idempotencyKey";
 import { InMemoryIdempotencyReplayStore, InMemoryIdempotencyStore } from "./idempotencyStore";
 import { MockPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
 import { validatePaymentRuntime } from "./runtimeConfig";
@@ -70,6 +71,7 @@ const allowInMemory = process.env.PAYMENT_ALLOW_INMEMORY === "true";
 validatePaymentRuntime(process.env.NODE_ENV, allowInMemory);
 const webhookSecret = resolveWebhookSecret(process.env.NODE_ENV, process.env.REQUEST_SIGNING_SECRET);
 const webhookToleranceSeconds = Math.max(30, Number(process.env.PAYMENT_WEBHOOK_TOLERANCE_SECONDS ?? 300) || 300);
+const idempotencyKeyMaxLength = Math.max(32, Number(process.env.PAYMENT_IDEMPOTENCY_KEY_MAX_LENGTH ?? 128) || 128);
 
 const createIntentSchema = z.object({
   order_id: z.string().min(1),
@@ -83,9 +85,13 @@ const idempotency = new InMemoryIdempotencyStore();
 const requestIdempotency = new InMemoryIdempotencyReplayStore();
 const adapter = new MockPaymentProviderAdapter();
 
-function readIdempotencyKey(req: Request): string | null {
-  const key = String(req.header("x-idempotency-key") ?? "").trim();
-  return key.length > 0 ? key : null;
+function readIdempotencyKey(req: Request, res: Response): string | null | undefined {
+  const parsed = parseIdempotencyKeyHeader(req.header("x-idempotency-key"), idempotencyKeyMaxLength);
+  if (!parsed.ok) {
+    res.status(400).json({ message: parsed.message });
+    return undefined;
+  }
+  return parsed.key;
 }
 
 function stableFingerprint(input: unknown): string {
@@ -105,7 +111,8 @@ app.post("/payments/intent", async (req: Request, res: Response) => {
   const parsed = createIntentSchema.safeParse(req.body);
   if (!parsed.success) return res.status(400).json({ message: "Invalid body", errors: parsed.error.flatten() });
   const userId = String(req.header("x-user-id") ?? "anonymous");
-  const idempotencyKey = readIdempotencyKey(req);
+  const idempotencyKey = readIdempotencyKey(req, res);
+  if (typeof idempotencyKey === "undefined") return;
   const intentFingerprint = stableFingerprint({
     orderId: parsed.data.order_id,
     userId,
@@ -155,7 +162,8 @@ app.post("/payments/intent", async (req: Request, res: Response) => {
 app.post("/payments/:id/confirm", async (req: Request, res: Response) => {
   const intent = intents.get(req.params.id);
   if (!intent) return res.status(404).json({ message: "Payment intent not found" });
-  const idempotencyKey = readIdempotencyKey(req);
+  const idempotencyKey = readIdempotencyKey(req, res);
+  if (typeof idempotencyKey === "undefined") return;
   const confirmFingerprint = stableFingerprint({ id: req.params.id, operation: "confirm" });
 
   if (idempotencyKey) {
@@ -185,7 +193,8 @@ app.post("/payments/:id/confirm", async (req: Request, res: Response) => {
 app.post("/payments/:id/refund", async (req: Request, res: Response) => {
   const intent = intents.get(req.params.id);
   if (!intent) return res.status(404).json({ message: "Payment intent not found" });
-  const idempotencyKey = readIdempotencyKey(req);
+  const idempotencyKey = readIdempotencyKey(req, res);
+  if (typeof idempotencyKey === "undefined") return;
   const refundFingerprint = stableFingerprint({ id: req.params.id, operation: "refund" });
 
   if (idempotencyKey) {
