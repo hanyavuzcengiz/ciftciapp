@@ -21,14 +21,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-        with:
-          version: 9
-
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: pnpm
+          node-version: 24
+
+      - name: Setup pnpm via Corepack
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.1.0 --activate
+          pnpm --version
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile=false
@@ -36,29 +37,55 @@ jobs:
       - name: Validate smoke checklist (no network)
         run: pnpm smoke:validate-list
 
+      - name: Smoke list preview for pull requests
+        if: github.event_name == 'pull_request'
+        run: pnpm smoke:prod:list:json
+
       - name: Prepare env
+        if: github.event_name == 'workflow_dispatch'
         run: cp .env.example .env
 
       - name: Start core infra
+        if: github.event_name == 'workflow_dispatch'
         run: pnpm docker:core
 
-      - name: Run DB migrations
-        run: pnpm db:migrate:all
+      - name: Wait for PostgreSQL health
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          for i in {1..40}; do
+            cid="$(docker compose ps -q postgres)"
+            if [ -n "$cid" ] && [ "$(docker inspect --format='{{.State.Health.Status}}' "$cid")" = "healthy" ]; then
+              echo "postgres is healthy"
+              exit 0
+            fi
+            echo "waiting for postgres health... ($i/40)"
+            sleep 3
+          done
+          echo "postgres did not become healthy in time"
+          docker compose ps
+          exit 1
+
+      - name: Run listing DB migration for smoke
+        if: github.event_name == 'workflow_dispatch'
+        run: pnpm db:listing:migrate
 
       - name: Start services in background
+        if: github.event_name == 'workflow_dispatch'
         run: nohup env GATEWAY_PROMETHEUS_METRICS=1 pnpm dev:services > /tmp/dev-services.log 2>&1 &
 
       - name: Wait services
+        if: github.event_name == 'workflow_dispatch'
         run: sleep 35
 
       # Istek: SMOKE_API_URL ile staging ortami (secret/variable); yoksa .env / NEXT_PUBLIC kullanilir
       - name: Smoke check (JSON)
+        if: github.event_name == 'workflow_dispatch'
         env:
           SMOKE_FETCH_TIMEOUT_MS: "60000"
         run: pnpm smoke:prod:json | tee /tmp/smoke-base.json
 
       - name: Smoke check metrics endpoint (optional profile)
-        if: github.event_name != 'workflow_dispatch' || github.event.inputs.enable_metrics_smoke != 'false'
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.enable_metrics_smoke != 'false'
         env:
           SMOKE_FETCH_TIMEOUT_MS: "60000"
           SMOKE_CHECK_METRICS: "1"
@@ -79,7 +106,7 @@ jobs:
           SMOKE_SLOW_CHECK_WARN_MS: ${{ github.event.inputs.slow_check_warn_ms || '5000' }}
           SMOKE_METRICS_ENABLED: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.enable_metrics_smoke != 'false' }}
         run: |
-          node -e "const fs=require('fs'); const files=[['Base profile','/tmp/smoke-base.json'],['Metrics profile','/tmp/smoke-metrics.json']]; const warnMs=Math.max(1, Number(process.env.SMOKE_SLOW_CHECK_WARN_MS||5000)); const metricsEnabled=String(process.env.SMOKE_METRICS_ENABLED||'').toLowerCase()==='true'; let out='## Smoke Summary\n\n'; out+=`- metrics smoke: ${metricsEnabled ? 'enabled' : 'disabled'}\n`; out+=`- slow check warning threshold: ${warnMs}ms\n\n`; out+='| Profile | OK | Failed | Checks | Total Wall (ms) |\n|---|---:|---:|---:|---:|\n'; for (const [label,p] of files){ if(!fs.existsSync(p)){ out+=`| ${label} | n/a | n/a | n/a | n/a |\n`; continue;} try{ const j=JSON.parse(fs.readFileSync(p,'utf8')); const checks=Array.isArray(j.results)?j.results.length:'n/a'; const fail=typeof j.failedCount==='number'?j.failedCount:'n/a'; const ok=typeof j.ok==='boolean'?(j.ok?'yes':'no'):'n/a'; const wall=typeof j.totalWallMs==='number'?j.totalWallMs:'n/a'; out+=`| ${label} | ${ok} | ${fail} | ${checks} | ${wall} |\n`; const failures=Array.isArray(j.results)?j.results.filter(r=>r&&r.ok===false).slice(0,3):[]; if(failures.length){ out+=`\n### ${label} - First failures\n`; for(const f of failures){ const n=f.name||'unknown'; const s=String(f.status ?? 'n/a'); const t=f.statusText||''; const h=f.hint?` | hint: ${f.hint}`:''; out+=`- ${n} (${s}${t?`: ${t}`:''})${h}\n`; } out+='\n'; } const rows=Array.isArray(j.results)?j.results.filter(r=>r&&typeof r.durationMs==='number'):[]; const slow=rows.slice().sort((a,b)=>b.durationMs-a.durationMs).slice(0,3); if(slow.length){ out+=`### ${label} - Slowest checks\n`; for(const r of slow){ out+=`- ${r.name||'unknown'} (${r.durationMs}ms)\n`; } out+='\n'; } const over=rows.filter(r=>r.durationMs>=warnMs).sort((a,b)=>b.durationMs-a.durationMs); if(over.length){ out+=`> WARNING: ${label} has ${over.length} check(s) >= ${warnMs}ms. Slowest: ${over[0].name||'unknown'} (${over[0].durationMs}ms)\n\n`; } }catch{ out+=`| ${label} | parse-error | n/a | n/a | n/a |\n`; }} fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, out);"
+          node scripts/ci-smoke-summary.mjs
 
       - name: Upload service logs on failure
         if: failure()
