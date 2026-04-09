@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   buildSignedPayload,
   computeWebhookSignature,
+  isWebhookTimestampFresh,
   resolveWebhookSecret,
   verifyWebhookSignature
 } from "../src/webhookSecurity";
@@ -27,4 +28,14 @@ test("verifyWebhookSignature accepts valid signatures", () => {
 test("verifyWebhookSignature rejects invalid signatures", () => {
   const body = { event: "payment.paid", payment_id: "pay_1" };
   assert.equal(verifyWebhookSignature("deadbeef", "1712660000", body, "prod-secret-123"), false);
+});
+
+test("timestamp freshness accepts close unix-second values", () => {
+  const now = 1_712_660_120_000;
+  assert.equal(isWebhookTimestampFresh("1712660120", now, 300), true);
+});
+
+test("timestamp freshness rejects stale values", () => {
+  const now = 1_712_660_120_000;
+  assert.equal(isWebhookTimestampFresh("1712659000", now, 300), false);
 });
