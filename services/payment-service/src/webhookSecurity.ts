@@ -20,6 +20,19 @@ export function computeWebhookSignature(payload: string, secret: string): string
   return crypto.createHmac("sha256", secret).update(payload).digest("hex");
 }
 
+export function isWebhookTimestampFresh(
+  timestampHeader: string,
+  nowMs: number,
+  toleranceSeconds: number
+): boolean {
+  const raw = Number(timestampHeader.trim());
+  if (!Number.isFinite(raw) || raw <= 0) return false;
+  // Accept both unix seconds and unix milliseconds.
+  const tsMs = raw > 1e12 ? raw : raw * 1000;
+  const skew = Math.abs(nowMs - tsMs);
+  return skew <= toleranceSeconds * 1000;
+}
+
 export function verifyWebhookSignature(
   signatureHeader: string,
   timestampHeader: string,

@@ -7,7 +7,7 @@ import { z } from "zod";
 import { InMemoryIdempotencyStore } from "./idempotencyStore";
 import { MockPaymentProviderAdapter, type PaymentStatus } from "./pspAdapter";
 import { validatePaymentRuntime } from "./runtimeConfig";
-import { resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
+import { isWebhookTimestampFresh, resolveWebhookSecret, verifyWebhookSignature } from "./webhookSecurity";
 
 type PaymentIntent = {
   id: string;
@@ -69,6 +69,7 @@ const isProd = process.env.NODE_ENV === "production";
 const allowInMemory = process.env.PAYMENT_ALLOW_INMEMORY === "true";
 validatePaymentRuntime(process.env.NODE_ENV, allowInMemory);
 const webhookSecret = resolveWebhookSecret(process.env.NODE_ENV, process.env.REQUEST_SIGNING_SECRET);
+const webhookToleranceSeconds = Math.max(30, Number(process.env.PAYMENT_WEBHOOK_TOLERANCE_SECONDS ?? 300) || 300);
 
 const createIntentSchema = z.object({
   order_id: z.string().min(1),
@@ -142,6 +143,9 @@ app.post("/payments/webhook/:provider", (req: Request, res: Response) => {
   const timestamp = String(req.header("x-timestamp") ?? "").trim();
   if (!webhookId || !signature || !timestamp) {
     return res.status(401).json({ message: "Missing webhook signature headers" });
+  }
+  if (!isWebhookTimestampFresh(timestamp, Date.now(), webhookToleranceSeconds)) {
+    return res.status(401).json({ message: "Webhook timestamp outside tolerance window" });
   }
 
   if (!verifyWebhookSignature(signature, timestamp, req.body, webhookSecret)) {
