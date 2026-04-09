@@ -1,0 +1,17 @@
+appId: com.agromarket.app
+---
+- launchApp
+- assertVisible: "Pastoral"
+- assertVisible: "Hazırlanıyor…"
+
+# Splash sonrası onboarding
+- assertVisible: "Doğrulanmış üreticiler"
+
+# Onboarding -> phone
+- tapOn: "İleri"
+- tapOn: "İleri"
+- tapOn: "Başla"
+
+# Phone screen smoke checks
+- assertVisible: "Telefon numaranız"
+- assertVisible: "Kod gönder"

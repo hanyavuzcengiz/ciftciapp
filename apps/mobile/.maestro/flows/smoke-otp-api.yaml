@@ -1,0 +1,77 @@
+appId: com.agromarket.app
+---
+# Gerekli: API gateway + user-service ayakta, NODE_ENV=production degil (123456 sabit OTP).
+- launchApp
+- extendedWaitUntil:
+    visible: "Doğrulanmış üreticiler"
+    timeout: 20000
+
+- tapOn: "İleri"
+- tapOn: "İleri"
+- tapOn: "Başla"
+
+- assertVisible: "Telefon numaranız"
+- tapOn:
+    id: "e2e-phone-input"
+- inputText: "551234567"
+- tapOn: "Kod gönder"
+
+- extendedWaitUntil:
+    visible: "SMS kodu"
+    timeout: 35000
+- tapOn:
+    id: "e2e-otp-input"
+- inputText: "123456"
+- tapOn: "Devam et"
+
+- extendedWaitUntil:
+    visible: "Profiliniz"
+    timeout: 35000
+
+# Varsayilan: Ciftci rolu + ornek ad — API veya mock modda kayit tamamlanir
+- scrollUntilVisible:
+    element:
+      id: "e2e-profile-submit"
+    direction: DOWN
+    timeout: 25000
+- tapOn:
+    id: "e2e-profile-submit"
+- extendedWaitUntil:
+    visible: "Ana Sayfa"
+    timeout: 45000
+- assertVisible: "Ara"
+
+# Sekmeler: Arama + Ilan ver (acilis dogrulamasi; yayin gerektirmez)
+- tapOn: "Ara"
+- extendedWaitUntil:
+    visible: "Ilan ara"
+    timeout: 15000
+- tapOn:
+    id: "e2e-search-input"
+- inputText: "traktor"
+
+- tapOn: "İlan ver"
+- extendedWaitUntil:
+    visible: "Ilan ver"
+    timeout: 15000
+- assertVisible: "Fotograf ve video alani"
+
+- tapOn: "Mesajlar"
+- extendedWaitUntil:
+    visible:
+      id: "e2e-messages-screen"
+    timeout: 25000
+
+- tapOn: "Profil"
+- extendedWaitUntil:
+    visible:
+      id: "e2e-profile-screen"
+    timeout: 25000
+- scrollUntilVisible:
+    element:
+      text: "Tekliflerim"
+    direction: DOWN
+    timeout: 25000
+
+- tapOn: "Ana Sayfa"
+- assertVisible: "Ana Sayfa"

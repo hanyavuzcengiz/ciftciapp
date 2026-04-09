@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "lib": ["ES2022"],
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@agromarket/shared-types": ["packages/shared-types/src"],
+      "@agromarket/shared-utils": ["packages/shared-utils/src"],
+      "@agromarket/ui-components": ["packages/ui-components/src"]
+    }
+  }
+}

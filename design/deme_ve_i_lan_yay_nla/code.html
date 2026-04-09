@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Payment Summary - The Pastoral Editorial</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#3c0800",
+                    "tertiary-fixed-dim": "#99cbff",
+                    "tertiary-container": "#2b79b7",
+                    "tertiary-fixed": "#cfe5ff",
+                    "surface": "#f9f9ff",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "on-secondary-fixed-variant": "#245100",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-highest": "#d6e3ff",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary-fixed": "#0a2000",
+                    "on-error-container": "#93000a",
+                    "surface-container": "#e8eeff",
+                    "surface-tint": "#b32a00",
+                    "on-tertiary-fixed-variant": "#004a78",
+                    "outline": "#8f7068",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-dim": "#cbdafc",
+                    "on-tertiary-container": "#fdfcff",
+                    "primary-fixed-dim": "#ffb4a2",
+                    "on-background": "#0b1b34",
+                    "tertiary": "#00609a",
+                    "on-surface-variant": "#5b403a",
+                    "secondary-fixed": "#a5f86b",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#d6e3ff",
+                    "error-container": "#ffdad6",
+                    "secondary": "#316b00",
+                    "primary-container": "#d63c10",
+                    "on-surface": "#0b1b34",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "primary": "#af2900",
+                    "secondary-container": "#a2f569",
+                    "outline-variant": "#e4beb5",
+                    "inverse-surface": "#21314a",
+                    "inverse-primary": "#ffb4a2",
+                    "inverse-on-surface": "#ecf0ff",
+                    "primary-fixed": "#ffdbd2",
+                    "on-primary-container": "#fffbff",
+                    "surface-bright": "#f9f9ff",
+                    "on-primary-fixed-variant": "#891e00",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-high": "#dfe8ff",
+                    "secondary-fixed-dim": "#8adb52",
+                    "on-secondary-container": "#347000"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": [
+                            "Work Sans"
+                    ],
+                    "body": [
+                            "Inter"
+                    ],
+                    "label": [
+                            "Inter"
+                    ]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .ease-editorial {
+        transition-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen pb-24 md:pb-0">
+<header class="bg-[#f9f9ff]/70 dark:bg-[#0b1b34]/70 backdrop-blur-xl docked full-width top-0 z-50 shadow-[0_4px_30px_rgba(11,27,52,0.06)] flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-on-surface text-2xl hover:opacity-80 transition-opacity">arrow_back</button>
+<h1 class="font-headline font-black text-[#af2900] tracking-tighter text-lg">The Pastoral Editorial</h1>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="search">search</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional livestock breeder wearing a wide-brimmed hat and denim shirt with a warm smile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwwPBM80GAlmMxqrAmpMHC-YCXNERgv-CaXtxegVUt1-vtzDW5uv5Hqply9NW3usg4OChAP-cJor5_t8P6Bz_qWMJiYcLt-c6UtGcGMaqg475mXu1CGmLX2ZfnIA0P4JTlTciPlb6TohhTCFmx_RmtT8k-fHBR-rfUk7npUq-jgahtWsWAhPGPyhQOjJLPr3QA2JB2R29aoE_JE0kxeXuxBWGCMvMmrQBdRJPDEbIKeMGnmp4YIfwLOPTB_f_LO3dmc28yogxKhmA"/>
+</div>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+<div class="md:col-span-5 space-y-6">
+<section>
+<h2 class="font-headline font-bold text-2xl tracking-tight mb-4 text-on-surface">Review Listing</h2>
+<div class="bg-surface-container-lowest rounded-full overflow-hidden shadow-[0_4px_30px_rgba(11,27,52,0.04)]">
+<div class="aspect-[4/3] w-full relative">
+<img alt="Simental Cow" class="w-full h-full object-cover" data-alt="a majestic simental cow standing in a lush green pasture with soft mountain range in background during golden hour morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC87EI59hqD0DS_QN7FEw4KPEgdv8pomI9knEA4UcUtMWkZUFxiE28aCdTxeJD1IzxSrmupY6HEinBAvTnTGsdaMRRnwUrlUkjy3k4YpLCCv9xlNruE2VeyGBQi6-6X21hFyYfkEGDVtJOC27OaRlkNdaMwHv-g34pUrEVFyw3OgmD_vGi__bTxOnJfoX8SfMCMxEtm9V_kBbMz9MndVW_u5s0gdh1NRcqXxr0lv1C5u1qK8uNLebMCra7s-u_g8RSc5XeYDglXpVM"/>
+<div class="absolute top-4 left-4">
+<span class="bg-secondary-container/90 backdrop-blur-md text-on-secondary-container px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Active Listing</span>
+</div>
+</div>
+<div class="p-6">
+<h3 class="font-headline font-bold text-xl text-on-surface">Simental Cow</h3>
+<p class="text-on-surface-variant text-sm mt-1 mb-4">Premium breeding asset from the Angus Cattle Co. collection.</p>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="block text-[10px] font-bold uppercase tracking-widest text-outline">Ear Tag</span>
+<span class="text-on-surface font-semibold">TR123</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl">
+<span class="block text-[10px] font-bold uppercase tracking-widest text-outline">Market Status</span>
+<span class="text-secondary font-bold">Verified</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="bg-surface-container-high rounded-full p-6 shadow-sm">
+<h3 class="font-headline font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">receipt_long</span>
+                    Payment Summary
+                </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center text-on-surface-variant text-sm">
+<span>Listing Fee</span>
+<span class="font-medium text-on-surface">50.00 TL</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant text-sm">
+<span>Platform Processing</span>
+<span class="font-medium text-on-surface">0.00 TL</span>
+</div>
+<div class="pt-3 mt-3 border-t border-outline-variant/15 flex justify-between items-end">
+<span class="font-headline font-bold text-on-surface">Total Amount</span>
+<span class="font-headline font-black text-2xl text-primary">50.00 TL</span>
+</div>
+</div>
+</section>
+</div>
+<div class="md:col-span-7">
+<section class="bg-surface-container-lowest rounded-full p-8 shadow-[0_8px_40px_rgba(11,27,52,0.05)]">
+<div class="mb-8">
+<h2 class="font-headline font-bold text-2xl tracking-tight text-on-surface">Secure Checkout</h2>
+<p class="text-on-surface-variant text-sm mt-2">All transactions are encrypted and processed through our agri-escrow system.</p>
+</div>
+<form class="space-y-6">
+<div class="grid grid-cols-1 gap-6">
+<div class="space-y-1.5">
+<label class="block text-[11px] font-bold uppercase tracking-widest text-outline ml-1">Card Holder Name</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-shadow placeholder:opacity-40" placeholder="Angus Cattle Co." type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="block text-[11px] font-bold uppercase tracking-widest text-outline ml-1">Card Number</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-shadow placeholder:opacity-40" placeholder="0000 0000 0000 0000" type="text"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 flex gap-2">
+<span class="material-symbols-outlined text-outline">credit_card</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="block text-[11px] font-bold uppercase tracking-widest text-outline ml-1">Expiry Date</label>
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-shadow placeholder:opacity-40" placeholder="MM/YY" type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="block text-[11px] font-bold uppercase tracking-widest text-outline ml-1">CVV</label>
+<div class="relative">
+<input class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary-container transition-shadow placeholder:opacity-40" placeholder="***" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-outline text-sm">help</span>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<button class="w-full bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold py-4 rounded-xl shadow-lg hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-3" type="submit">
+<span class="material-symbols-outlined" data-weight="fill">lock</span>
+                            Pay and Publish
+                        </button>
+<p class="text-center text-[10px] text-outline mt-4 uppercase tracking-[0.2em]">Secured by Terra Pay Escrow</p>
+</div>
+</form>
+<div class="mt-12 grid grid-cols-3 gap-4 opacity-40 grayscale">
+<img alt="Visa" class="h-6 mx-auto" data-alt="clean minimal visa logo icon for payment provider" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGIsscNffP5M2Te3-YBUOItMWpFX91uOlN8fvh190nxQlfEr4TlKWSzkxynt7I19jJAEuPF1w1m01hXAYZLH_4ixhAmYEIxtQ7ZqbDiEwOh-Y3Vu7Fvnmebn0Fz2Vwi2Myb-Eu3d7z1WORWWS4frGPMHHiSeYEHkx_pItFmLjCxvCdClnDKqRhjPz-zKjd0f3R8wJdBg1rclxCVuSRAJUfKl0VjKTk7CI1U7csMhuQpB6z9_lbY_vzLAVRyLXmoM-NtgUsbsR2H3g"/>
+<img alt="Mastercard" class="h-6 mx-auto" data-alt="clean minimal mastercard logo icon for payment provider" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAxvDkSJhpMw9dWy4fzO4lQ3EhsttuffL26KafhSIlOCv6LGWpqVXGIEWrvXOwNLzN0j2xPyvUMsJAbI5KdGCSAFB4YqbM_v-UX5_6kOTwwqcDRGTvrgcJBARGeDNMBOggjRfFTxmYKoHgaKyfaEOi6wweH1S5H8ziqITE-tF5XWnFwI0DO661KhEAY5p3Sd6PXrNCi88RgqeqoykKTcjy_XqtG74DWfnRX8ZTFmTZGrjj-dF51y6QrYSDEkzrOlHP2B2zwy15p84"/>
+<img alt="Amex" class="h-6 mx-auto" data-alt="clean minimal american express logo icon for payment provider" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxUkjkdJsohUehdnc1AuQ7G4923bGBDGhAnkh7UupJhyDT4OOfQiPlgd1Iur08IPj-qX_eklrepSYhW6b31SNP3LxuoWukUmDiEaCd6YjB8MOIIJ3PAf6AHfo7BtnWGDd9lcQvpr4fhRpT0l9G9qrFbp69WmAnG1Zo_qyeDPew2_WwQMFOUC8KT7NkG8qkIpgNTQbelgReDDpxVvWokFfHx4zq-J0jz0HHPUb87HEUecReDrFkQq6mZoFYqsF84_h1CBxk_62W_pg"/>
+</div>
+</section>
+</div>
+</main>
+<nav class="md:hidden fixed bottom-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#f9f9ff]/80 dark:bg-[#0b1b34]/80 backdrop-blur-lg shadow-[0_-8px_30px_rgba(11,27,52,0.04)] rounded-t-[0.75rem]">
+<a class="flex flex-col items-center justify-center text-[#5b403a] dark:text-[#d6e3ff] opacity-60 hover:bg-[#f0f3ff] dark:hover:bg-[#1a2b44] transition-colors" href="#">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-widest mt-1">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5b403a] dark:text-[#d6e3ff] opacity-60 hover:bg-[#f0f3ff] dark:hover:bg-[#1a2b44] transition-colors" href="#">
+<span class="material-symbols-outlined">gavel</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-widest mt-1">Bids</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#af2900] dark:text-[#f04e23] bg-[#f0f3ff] dark:bg-[#1a2b44] rounded-xl px-3 py-1 transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-widest mt-1">Sell</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5b403a] dark:text-[#d6e3ff] opacity-60 hover:bg-[#f0f3ff] dark:hover:bg-[#1a2b44] transition-colors" href="#">
+<span class="material-symbols-outlined">workspace_premium</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-widest mt-1">Pro</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5b403a] dark:text-[#d6e3ff] opacity-60 hover:bg-[#f0f3ff] dark:hover:bg-[#1a2b44] transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[11px] font-semibold uppercase tracking-widest mt-1">Account</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Work+Sans:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#dfe8ff",
+                    "on-secondary-container": "#347000",
+                    "secondary-fixed-dim": "#8adb52",
+                    "on-primary-fixed-variant": "#891e00",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#ffdbd2",
+                    "inverse-on-surface": "#ecf0ff",
+                    "inverse-primary": "#ffb4a2",
+                    "inverse-surface": "#21314a",
+                    "outline-variant": "#e4beb5",
+                    "secondary-container": "#a2f569",
+                    "primary": "#af2900",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1b34",
+                    "primary-container": "#d63c10",
+                    "secondary": "#316b00",
+                    "surface-variant": "#d6e3ff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#a5f86b",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#5b403a",
+                    "tertiary": "#00609a",
+                    "on-tertiary-container": "#fdfcff",
+                    "primary-fixed-dim": "#ffb4a2",
+                    "on-background": "#0b1b34",
+                    "surface-dim": "#cbdafc",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#b32a00",
+                    "on-tertiary-fixed-variant": "#004a78",
+                    "outline": "#8f7068",
+                    "surface-container": "#e8eeff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#0a2000",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-highest": "#d6e3ff",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary-fixed-variant": "#245100",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-fixed": "#cfe5ff",
+                    "surface": "#f9f9ff",
+                    "tertiary-container": "#2b79b7",
+                    "on-primary-fixed": "#3c0800",
+                    "tertiary-fixed-dim": "#99cbff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Work Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface pb-32">
+<!-- TopAppBar (From JSON Anchor) -->
+<header class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/10 dark:border-slate-800/10 shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-slate-500 hover:bg-slate-100 p-2 rounded-full transition-colors">arrow_back</button>
+<h1 class="font-['Work_Sans'] font-bold tracking-tight text-on-surface text-xl">The Pastoral</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="material-symbols-outlined text-orange-600 dark:text-orange-500">notifications</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional male portrait for user profile icon with neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzTRUgaPbhk5M2ceZhsR7K2mZH5OzUxBD1AaqhgnRpVgs88UiRhIBdR9MM7s3RAoiH4I0k1ysZ8J3HTB9L_wrm5kIYDh02LEipBgK2_r9fTfDsG7MvZBhQ0m_9Jd8wqlZ3NjlnW-a9brlxSw0F-DN9HBbajQEoijtTgsihZuOEL3FXDzS_2BaHvRGtc8DDgvK8b5EEOOaurAI38x6vMk64nslAffYlF0lpL82M9KVj_MvSaQgFNaaHEBCderU8BEw6nnX3Eo5IRbg"/>
+</div>
+</div>
+</header>
+<main class="mt-20 max-w-5xl mx-auto px-4 md:px-0">
+<!-- Editorial Gallery Layout -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-3 h-[450px] md:h-[600px] mb-8">
+<div class="md:col-span-3 h-full rounded-xl overflow-hidden relative group">
+<img class="w-full h-full object-cover" data-alt="prime holstein cow standing in a lush green pasture under soft morning sunlight with misty hills in the background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFICOzlaABsS8UB4zGykdEf9FZfBuOAqwVE36a41bEGh6__DxQrdSASQZWIM7eHY6P2BVFWs2438YhsswYBpn62rwYSc-ALzXnIic1eW1FY4Aech_FRjBEkvxlPYQFkqPSjW4iPBTOcpfxq7m6hDehVU5a8vgoQPHDS5SpHDyNmxeN9_nVYvDEUlqZd7MrguIMwcuVlUopSo_BNM7WpmdSu91SAJ-yPXhmYg2Bj0oYRj2vdNj3crML5u_CBtGWHm4FgVY0VfGH0W0"/>
+<div class="absolute bottom-4 left-4 bg-on-surface/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-semibold tracking-wider uppercase">Main View</div>
+</div>
+<div class="hidden md:grid grid-rows-3 gap-3">
+<div class="rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="close up profile shot of a holstein cow showing clear black and white patterns and ear tag" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmIDTAnYXlpwU-n1eXcItLklZjt7Oj65bjUgj-LkWhGrwxQ4w_UGRTAkkLQbkIbEOjkR-5IyU8h_6I4TQBqM0RGMYlm5ZsZPLjzj_HRj7LhAH_xx-7PEgOKhUugQxulJVQYW3H5fHGjmYqVMundmXYA7BsZZYgdDcmxlygJvefnUIlyg2griclBdu8DxzI4aXNM-iOU_t9f7JN584Vb95YOy8eEF3gKGN3lNk77jva08Ggbo29aFcyYH06iQFVnfytcZ8tLIVY_Pk"/>
+</div>
+<div class="rounded-xl overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="wide shot of dairy cows grazing in a scenic meadow at dusk with warm lens flares" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSXDrOkPD14gSdDU1QwXqLD_7lGn1DhXL1rOmoRSTuuZcwgwxwYEXCLq8z5eQDU0RgbEld9cNQ5kx4yNZAaJ-HirUv9LccXD6_JUR2E5ESbh1iY05VSxhXuH7tjjyzDaQEZg_I8kRBSpQJb_ERSM4BHwQeCVdGTugKj-D5W9c7R8JTfRzZ6qTUL3baow7dklnDX-HIs4YMM9107PBy8epHN4piL3gO1R8tZzWTvBxVVsiEudLyis8lVPqJRmG-g5mBpYofs9g9tmE"/>
+</div>
+<div class="rounded-xl overflow-hidden relative">
+<img class="w-full h-full object-cover filter brightness-50" data-alt="blurry close up of livestock grass as texture for gallery placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmflnil_W7vr_jIf80DPw-Rkm5_A3W8OoYUJDHMgzsCMkm2w9MzgeQUkRTmbFEIL4P8pdqoCXm3NxNPoQgdMECY2QLeFt9hZTpHnSZx8wtM6IGqnWotRtp_aE69cg7cGyUwmDS5QBYDc-zSyZjrJstLu1cZVD6wyhUnNEIWst5KihvqNhegVAcjowe6qRIP8NFLKfD_RXatiKVB8HwMI0qMTpn1NgUygSpyYP_3iz76FMR4FsKgYYtcfCrRH828rUo9jbT9CU-yXs"/>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-white">
+<span class="material-symbols-outlined text-3xl">play_circle</span>
+<span class="text-xs font-bold mt-1">+4 Photos</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Content Shell -->
+<div class="flex flex-col md:flex-row gap-8">
+<div class="flex-1 space-y-8">
+<!-- Title & Price Block -->
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">Verified Listing</span>
+<span class="text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">visibility</span>
+                            1,245 kez görüntülendi
+                        </span>
+</div>
+<h2 class="font-headline text-4xl font-extrabold text-on-surface tracking-tight">Purebred Holstein Heifer</h2>
+<p class="text-primary text-3xl font-black">₺42.500</p>
+</div>
+<!-- Spec Grid (Custom Component) -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary mb-1">calendar_month</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-tighter">Age</span>
+<span class="text-lg font-bold text-on-surface">24 Months</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary mb-1">weight</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-tighter">Weight</span>
+<span class="text-lg font-bold text-on-surface">540 kg</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary mb-1">pets</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-tighter">Breed</span>
+<span class="text-lg font-bold text-on-surface">Holstein</span>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary mb-1">location_on</span>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-tighter">Location</span>
+<span class="text-lg font-bold text-on-surface">Balıkesir</span>
+</div>
+</div>
+<!-- Editorial Content Section -->
+<section class="space-y-4">
+<h3 class="font-headline text-2xl font-bold">Livestock Health &amp; History</h3>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/15 space-y-4">
+<p class="text-on-surface leading-relaxed">
+                            Excellent dairy specimen with high genetic merit. This heifer has been raised on a strict organic pasture-based system. Healthy temperament and prime body condition score.
+                        </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<h4 class="font-bold text-sm">Vaccination Records</h4>
+<p class="text-sm text-on-surface-variant">Up to date: Foot-and-Mouth, Brucellosis, Anthrax.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-secondary">check_circle</span>
+<div>
+<h4 class="font-bold text-sm">Veterinary Clearance</h4>
+<p class="text-sm text-on-surface-variant">Last checked March 2024. All vitals normal.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Seller Sidebar -->
+<aside class="w-full md:w-80 space-y-6">
+<div class="bg-surface-container p-6 rounded-2xl sticky top-24">
+<div class="flex flex-col items-center text-center space-y-4">
+<div class="w-20 h-20 rounded-full bg-surface-container-highest p-1 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="friendly experienced middle aged farmer smiling outdoors on dairy farm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrPlkCeshuQN-Rgy1WtqmuffGEz3N4pEBDaslyGoeGJ5ZySyfwfp5o-CR6N8MHo7rx0ECjRuRnV8u2mXLaA8mGUc2z2JgmPVOj6czipkljJyHg-GlPImOtJd5n2VzuYocT5euwLxqDqZMxRsx5DSAHdVQ_ZMnnOYyHx3Rsp8ky0_3B35VX-Xbj9EgAJvpirnvJsoVvt6Vl5Chl13XbcsEqeQnofMMonO-xpQiBvcXLGauyJSb9f6ehkm7SaqA9gh_x0qAcG20hygY"/>
+</div>
+<div>
+<h4 class="text-xl font-bold text-on-surface">Ahmet Yılmaz</h4>
+<p class="text-on-surface-variant text-sm">Member since 2019</p>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-lowest px-3 py-1 rounded-full shadow-sm">
+<span class="material-symbols-outlined fill-icon text-orange-500 text-sm">star</span>
+<span class="font-bold text-sm">4.8</span>
+<span class="text-on-surface-variant text-xs">(124 reviews)</span>
+</div>
+<div class="w-full pt-4 border-t border-outline-variant/15 flex flex-col gap-2">
+<button class="bg-primary text-on-primary w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">mail</span>
+                                Mesaj Gönder
+                            </button>
+<button class="bg-surface-container-highest text-on-surface w-full py-3 rounded-xl font-bold flex items-center justify-center gap-2 border border-outline-variant/20 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">call</span>
+                                Ara
+                            </button>
+</div>
+</div>
+</div>
+<!-- Mini Map / Location -->
+<div class="rounded-2xl overflow-hidden h-40 bg-surface-container-low relative">
+<img class="w-full h-full object-cover opacity-60" data-alt="stylized map view of balikesir agricultural region with location pin over green pastures" data-location="Balıkesir, Turkey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMOJLPjvAXZ-2NP3nJrwqSv-l7Q0N1NfUuNq07V1mKaQ-kw3-tHU8oB-SPK2GDwwHQjXWxoeQ15EOuOaFMSZR_o4J3ua6bYyG8pbkgT4dJMDZg8YJiIaqPQJUO6nImBsKuF62ds_EQWE609l6ZMY65Nqa3SDjoKH-dNUSxXbJyDEHbvec__wLr0kyExjUnMQcvLBJEs1CwZpoHzYgVJh8R13UTPH4CA5TdfrJmAvhv6p5wePc2G3Rp9ZO4iKtHwhaepGrrrKadQkk"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl fill-icon">location_on</span>
+</div>
+<div class="absolute bottom-2 left-2 bg-surface-container-lowest/80 backdrop-blur px-2 py-1 rounded text-[10px] font-bold text-on-surface uppercase tracking-widest">Balıkesir Center</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Floating Action Buttons (Mobile View Specific) -->
+<div class="md:hidden fixed bottom-6 left-6 right-6 flex gap-3 z-50">
+<button class="flex-1 bg-primary text-on-primary py-4 rounded-2xl font-bold shadow-xl flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">chat_bubble</span>
+            Mesaj Gönder
+        </button>
+<button class="w-16 bg-secondary text-on-secondary rounded-2xl shadow-xl flex items-center justify-center active:scale-95 transition-transform">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+</body></html>

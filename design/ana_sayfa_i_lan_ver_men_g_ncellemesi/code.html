@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#ffb4a2",
+                        "on-background": "#0b1b34",
+                        "on-tertiary-container": "#fdfcff",
+                        "tertiary": "#00609a",
+                        "on-surface-variant": "#5b403a",
+                        "surface-dim": "#cbdafc",
+                        "outline": "#8f7068",
+                        "surface-tint": "#b32a00",
+                        "on-tertiary-fixed-variant": "#004a78",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container": "#e8eeff",
+                        "surface-container-highest": "#d6e3ff",
+                        "on-tertiary-fixed": "#001d34",
+                        "surface-container-low": "#f0f3ff",
+                        "on-secondary-fixed": "#0a2000",
+                        "on-secondary-fixed-variant": "#245100",
+                        "surface": "#f9f9ff",
+                        "tertiary-fixed": "#cfe5ff",
+                        "background": "#f9f9ff",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#99cbff",
+                        "on-primary-fixed": "#3c0800",
+                        "tertiary-container": "#2b79b7",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#891e00",
+                        "secondary-fixed-dim": "#8adb52",
+                        "on-secondary-container": "#347000",
+                        "surface-container-high": "#dfe8ff",
+                        "primary-fixed": "#ffdbd2",
+                        "surface-bright": "#f9f9ff",
+                        "on-primary-container": "#fffbff",
+                        "inverse-on-surface": "#ecf0ff",
+                        "inverse-surface": "#21314a",
+                        "inverse-primary": "#ffb4a2",
+                        "secondary-container": "#a2f569",
+                        "outline-variant": "#e4beb5",
+                        "primary": "#af2900",
+                        "secondary": "#316b00",
+                        "primary-container": "#d63c10",
+                        "on-surface": "#0b1b34",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#a5f86b",
+                        "error-container": "#ffdad6",
+                        "surface-variant": "#d6e3ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Work Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary/20">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 bg-[#f9f9ff] h-16 w-full flex justify-between items-center px-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="shield_person">shield_person</span>
+<h1 class="font-headline font-black text-xl tracking-widest text-on-background uppercase">PASTORAL</h1>
+</div>
+<div class="h-10 w-10 rounded-full bg-surface-container-high border-2 border-primary/10 overflow-hidden flex items-center justify-center">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Professional portrait of a male livestock specialist in a crisp shirt with soft natural lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCczfOIfy0RY4hCTAjQ3EGRkJs9oupevF3HFg5qPmh0jd0hk_FEzsYWokzJ9y8grJgwKeLOElE7gsv0z_c73grbnq0Msk-oA3yx0-fzfXc9vWOG8SoTfS2D11eZxwSUbZFIAniqDzi-iKsbxTnjduXVAvcpVvp0TNG_4NUvRE93WamxC7VEAybKoFZqSSPMByMNIqCEDHe2mC3JYyLElRRaDfMt1MwgHHSp_YH3DTJ0c8tDANahPEy3Gk-7y9IfoPxsSu6J2PFSHb8"/>
+</div>
+</header>
+<main class="pb-32 px-4 max-w-5xl mx-auto space-y-8 mt-6">
+<!-- Editorial Section Header -->
+<section class="space-y-2">
+<h2 class="font-headline text-3xl font-bold tracking-tight text-on-background">Günün İlanları</h2>
+<p class="text-on-surface-variant font-medium opacity-80">Premium besi hayvanları ve damızlıklar</p>
+</section>
+<!-- Asymmetric Bento Grid / Listings -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Listing Card 1 (Large Focus) -->
+<article class="md:col-span-2 bg-surface-container-lowest rounded-xl overflow-hidden group shadow-sm hover:shadow-md transition-shadow">
+<div class="relative aspect-[16/9] w-full">
+<img alt="Angus Cattle" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="High-quality close-up of a prize Angus bull standing in a lush green pasture under soft morning sunlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB15jf3MFUTJaprG7piIHlwWrPw4K1mrqH-6LgfNF3vvKBc_lemFHKAkx5HeFzQV-XY9-G5Y_1PK9ECIwcTvUuUEsWFDdwSxws_w-8gr9B34sb_E7bd4O0nKDaimK3DjIXzkQT6kz-vpiZlJv81om93-M8vVkqnXsrZQBxiISI8gtvMRxsfPyAUcloPe3gMkx7QvE2mgY-NOiQaA1M4IYSGzH7TwNrmQ6lacFDt9T83UBAmwAzW7UX0zVH2T5n-BS7uwOyJMc85u8E"/>
+<div class="absolute top-4 left-4 bg-secondary/10 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-2 border border-secondary/20">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-secondary text-xs font-bold uppercase tracking-wider">Onaylı Satıcı</span>
+</div>
+<div class="absolute bottom-4 right-4 bg-on-background/80 backdrop-blur-md text-white px-4 py-2 rounded-lg font-headline font-bold text-lg">
+                        ₺85.000
+                    </div>
+</div>
+<div class="p-6 space-y-4">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-xl font-bold text-on-background">Safkan Siyah Angus</h3>
+<p class="text-on-surface-variant flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span> Balıkesir, Gönen
+                            </p>
+</div>
+<span class="bg-surface-container-low text-on-surface-variant px-3 py-1 rounded text-xs font-mono font-bold">#TR10-45920</span>
+</div>
+<!-- Spec Grid -->
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-surface-container-low p-3 rounded-lg text-center">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-bold">Ağırlık</p>
+<p class="text-sm font-bold text-on-background">640 kg</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg text-center">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-bold">Yaş</p>
+<p class="text-sm font-bold text-on-background">24 Ay</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg text-center">
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant/60 font-bold">Cins</p>
+<p class="text-sm font-bold text-on-background">Angus</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Listing Card 2 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden group shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="relative aspect-square w-full">
+<img alt="Holstein Cow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Beautiful Holstein cow in a clean, modern barn setting with dramatic natural side lighting highlighting its texture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjzC8Ujf_xc5Hw_POCtvUyhnbu4i3qdVUbbsxbwTLEEBZWGUHHeZ6bQQCOrhuS9E8FR4_bD12ddeuHmz39U-LEROUoA5oIR79-A6cZ6gOJg1IEKuBxoK0uBkjwabVjNAu6NPBhPHtHfOgM7JTDK4Zkssq3XB11YmnsvYfs8LceS9Kzdj6fGY0Ur-J8I8SrzJP5MYLNgtV2hTRbic82dJ6lyNAetj5VQg10hTDeaodMYPuN--jqh0wdH9dNoC-cX5_43dMJTXxAfds"/>
+<div class="absolute bottom-4 left-4 bg-primary/90 text-white px-3 py-1.5 rounded-lg font-bold">
+                        ₺52.000
+                    </div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-on-background">Holstayn Düve</h3>
+<span class="text-[10px] font-mono font-bold text-on-surface-variant opacity-60">#TR34-1102</span>
+</div>
+<p class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span> Konya, Ereğli
+                        </p>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-low p-2.5 rounded-lg">
+<p class="text-[9px] uppercase tracking-tighter text-on-surface-variant/70 font-bold">Ağırlık</p>
+<p class="text-xs font-bold">420 kg</p>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg">
+<p class="text-[9px] uppercase tracking-tighter text-on-surface-variant/70 font-bold">Yaş</p>
+<p class="text-xs font-bold">18 Ay</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Listing Card 3 -->
+<article class="bg-surface-container-lowest rounded-xl overflow-hidden group shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="relative aspect-square w-full">
+<img alt="Simmental Cow" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Vibrant Simmental cattle in an alpine meadow during summer, golden hour lighting and high-contrast colors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2TYNVCW45bjrc3Tpwt0Yialm9Rf8HvgoFboS1YXT91GXWRxm9pkSojaPdlxyec0Gvs5IeNJZzqj7rIaGNIgV8ya7RtUXagHIBLUwJH5nRs6IHERsIgpJUmMuXBHDcwgcNHNmJWG15dvrLIcW8WmLmXk2WelaLTFlT2kLWsF2Prl_Fcv44Ot1jWuFuXHYkYbotfUVxk2i5ACLYPapQcuXmIlDvL2sAh-WRxDDebe-jFNoxhYukO-vQKPWPvK9L3xk2iDVCMk2Ppbw"/>
+<div class="absolute bottom-4 left-4 bg-primary/90 text-white px-3 py-1.5 rounded-lg font-bold">
+                        ₺68.500
+                    </div>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+<div class="space-y-1">
+<div class="flex justify-between items-center">
+<h3 class="font-bold text-on-background">Simental Gebe</h3>
+<span class="text-[10px] font-mono font-bold text-on-surface-variant opacity-60">#TR16-8821</span>
+</div>
+<p class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span> Bursa, Karacabey
+                        </p>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<div class="bg-surface-container-low p-2.5 rounded-lg">
+<p class="text-[9px] uppercase tracking-tighter text-on-surface-variant/70 font-bold">Ağırlık</p>
+<p class="text-xs font-bold">580 kg</p>
+</div>
+<div class="bg-surface-container-low p-2.5 rounded-lg">
+<p class="text-[9px] uppercase tracking-tighter text-on-surface-variant/70 font-bold">Yaş</p>
+<p class="text-xs font-bold">30 Ay</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Map Visualization Card -->
+<article class="lg:col-span-1 bg-surface-container-high rounded-xl overflow-hidden relative min-h-[280px]">
+<div class="absolute inset-0 z-0">
+<img alt="Map" class="w-full h-full object-cover opacity-40 grayscale" data-alt="Stylized topographic map with cattle farm icons scattered across the Anatolian plateau region" data-location="Turkey" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCC_4ggihNMQab4JmwQp0_ug3VJe0ovR-3-S9DB-0XUtpu8JwqQV-eKat7ibNZ0aPDZKPDq33sSF4CyDmjIgOgHuXkwi91t5IpqmTtH-kwfhhZUYsIKdNB10ExNZKLz0sM6Sif79Djtf0qb1mGkY02de-xVSSPsYk8FZfcVDJA5PNULK4cjFbvB54XJzgu_QjBpcdzMKsQKIGDYtgGu9ckefjpnsNPlYgkgUxZvhm_YZM4nKU6EbztaISMXFqmgXkLkqiK_G4u3oFs"/>
+</div>
+<div class="relative z-10 p-6 flex flex-col h-full justify-between">
+<div>
+<h3 class="font-headline font-bold text-lg text-on-background">Çevremdeki İlanlar</h3>
+<p class="text-sm text-on-surface-variant">25km çapındaki 12 aktif ilan</p>
+</div>
+<button class="bg-on-background text-white px-6 py-3 rounded-lg font-bold text-sm w-fit shadow-lg active:scale-95 transition-transform flex items-center gap-2">
+                        Haritayı Aç
+                        <span class="material-symbols-outlined text-sm" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</article>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-end px-4 pb-6 pt-2 bg-[#d6e3ff]/70 backdrop-blur-xl border-t border-[#e4beb5]/15 shadow-[0_-4px_24px_rgba(11,27,52,0.06)] rounded-t-xl">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#af2900] to-[#d63c10] text-white rounded-xl px-4 py-1.5 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px] mt-0.5">Ana Sayfa</span>
+</a>
+<!-- Search -->
+<a class="flex flex-col items-center justify-center text-[#5b403a] px-4 py-1.5 hover:bg-[#f0f3ff]/50 transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px] mt-0.5">Arama</span>
+</a>
+<!-- POST AD (Prominent Center Button) -->
+<div class="relative -top-8 flex flex-col items-center">
+<button class="w-16 h-16 bg-[#F04E23] rounded-full shadow-[0_8px_20px_rgba(240,78,35,0.4)] flex items-center justify-center text-white active:scale-90 transition-all duration-200 group border-4 border-white">
+<span class="material-symbols-outlined text-4xl" data-icon="add">add</span>
+</button>
+<span class="font-['Work_Sans'] font-bold text-[11px] text-[#F04E23] mt-2">İlan Ver</span>
+</div>
+<!-- Messages -->
+<a class="flex flex-col items-center justify-center text-[#5b403a] px-4 py-1.5 hover:bg-[#f0f3ff]/50 transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px] mt-0.5">Mesajlar</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-[#5b403a] px-4 py-1.5 hover:bg-[#f0f3ff]/50 transition-colors active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px] mt-0.5">Profil</span>
+</a>
+</nav>
+</body></html>

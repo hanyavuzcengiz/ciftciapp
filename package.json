@@ -1,0 +1,46 @@
+{
+  "name": "agromarket-monorepo",
+  "private": true,
+  "packageManager": "pnpm@9.1.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "dev:services": "turbo run dev --parallel --filter=!@agromarket/mobile --filter=!@agromarket/admin-panel",
+    "dev:mobile": "pnpm --filter @agromarket/mobile dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck",
+    "format": "turbo run format",
+    "verify": "pnpm smoke:validate-list && pnpm lint && pnpm typecheck && pnpm test && pnpm build",
+    "docker:up": "docker compose up -d",
+    "docker:core": "docker compose up -d postgres redis elasticsearch",
+    "db:listing:migrate": "pnpm --filter @agromarket/listing-service exec prisma migrate deploy",
+    "db:user:migrate": "pnpm --filter @agromarket/user-service exec node scripts/apply-sql-migrations.mjs",
+    "db:migrate:all": "pnpm db:user:migrate && pnpm db:listing:migrate",
+    "db:seed:live": "node scripts/seed-live-sim.mjs",
+    "smoke:prod": "node scripts/smoke-prod-readiness.mjs",
+    "smoke:prod:verbose": "node scripts/smoke-prod-readiness.mjs --verbose",
+    "smoke:prod:fail-fast": "node scripts/smoke-prod-readiness.mjs --fail-fast",
+    "smoke:prod:list": "node scripts/smoke-prod-readiness.mjs --list",
+    "smoke:prod:list:json": "node scripts/smoke-prod-readiness.mjs --list --json",
+    "smoke:prod:help": "node scripts/smoke-prod-readiness.mjs --help",
+    "smoke:prod:json": "node scripts/smoke-prod-readiness.mjs --json",
+    "smoke:validate-list": "node scripts/validate-smoke-check-list.mjs",
+    "e2e:mobile:smoke": "pnpm --filter @agromarket/mobile run e2e:smoke",
+    "e2e:mobile:smoke:tabs-dev": "pnpm --filter @agromarket/mobile run e2e:smoke:tabs-dev",
+    "e2e:mobile:smoke:otp-api": "pnpm --filter @agromarket/mobile run e2e:smoke:otp-api",
+    "e2e:mobile:smoke:quick": "pnpm --filter @agromarket/mobile run e2e:smoke:quick",
+    "eas:android": "pnpm -C apps/mobile dlx eas-cli@14 build -p android --profile preview"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.3",
+    "typescript": "^5.6.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "react": "18.2.0",
+      "react-dom": "18.2.0",
+      "react-native": "0.74.5"
+    }
+  }
+}

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Pastoral | Messaging</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#dfe8ff",
+                        "on-secondary-container": "#347000",
+                        "secondary-fixed-dim": "#8adb52",
+                        "on-primary-fixed-variant": "#891e00",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#fffbff",
+                        "surface-bright": "#f9f9ff",
+                        "primary-fixed": "#ffdbd2",
+                        "inverse-on-surface": "#ecf0ff",
+                        "inverse-primary": "#ffb4a2",
+                        "inverse-surface": "#21314a",
+                        "outline-variant": "#e4beb5",
+                        "secondary-container": "#a2f569",
+                        "primary": "#af2900",
+                        "on-error": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface": "#0b1b34",
+                        "primary-container": "#d63c10",
+                        "secondary": "#316b00",
+                        "surface-variant": "#d6e3ff",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#a5f86b",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#5b403a",
+                        "tertiary": "#00609a",
+                        "on-tertiary-container": "#fdfcff",
+                        "primary-fixed-dim": "#ffb4a2",
+                        "on-background": "#0b1b34",
+                        "surface-dim": "#cbdafc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#b32a00",
+                        "on-tertiary-fixed-variant": "#004a78",
+                        "outline": "#8f7068",
+                        "surface-container": "#e8eeff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#0a2000",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-container-highest": "#d6e3ff",
+                        "on-tertiary-fixed": "#001d34",
+                        "on-secondary-fixed-variant": "#245100",
+                        "on-secondary": "#ffffff",
+                        "background": "#f9f9ff",
+                        "tertiary-fixed": "#cfe5ff",
+                        "surface": "#f9f9ff",
+                        "tertiary-container": "#2b79b7",
+                        "on-primary-fixed": "#3c0800",
+                        "tertiary-fixed-dim": "#99cbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Work Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .font-headline { font-family: 'Work Sans', sans-serif; }
+        .glass-effect { backdrop-filter: blur(12px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/10 dark:border-slate-800/10 shadow-sm sticky top-0 z-50 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional portrait of a middle-aged farmer with a friendly smile wearing a rugged canvas jacket and a baseball cap" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYeci_npuHIUV0z5_kVwJ6nAmApE1rbaW8wE-ufapvI5YV6dpZYIx66tkXqv5PAA-VYlVUdxKKMjL_lplg_YAWadulaYgA4Q5bSkdZSYcSH8ce6OJVNDD4nI_67W5SjYFVWLDbVM2xz82DE2IphP27G1c3S0-hy4GJXJup3jnBSVrdKK5Y8ogG6uz3V61aJ8wSuUc-9ZzdkPJS4dPo662zoAzxr6CXzwaGTQ248oz5YoigCR6cdZiXfxdbCWIcVjBU7yfb-sJopI8"/>
+</div>
+<h1 class="text-2xl font-black text-slate-900 dark:text-slate-50 uppercase tracking-widest font-headline">The Pastoral</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-slate-500 dark:text-slate-400">notifications</span>
+</button>
+</div>
+</header>
+<!-- Main Content: Messaging Layout -->
+<main class="flex-1 flex overflow-hidden h-[calc(100vh-140px)]">
+<!-- Conversation List (Sidebar) -->
+<aside class="hidden md:flex flex-col w-1/3 lg:w-1/4 bg-surface-container-low border-r border-outline-variant/15">
+<div class="p-6">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-high border-none rounded-full py-3 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Search conversations" type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto space-y-1 px-3">
+<!-- Conversation Item: Active -->
+<div class="flex items-center gap-4 p-4 rounded-xl bg-surface-container-highest shadow-sm cursor-pointer transition-colors border-l-4 border-primary">
+<div class="relative shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="portrait of a woman in agricultural attire outdoors with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFAEoeayp10ZcI7MFuZDBOVN5IWKH1CW7EBuG04GC2TYIA44esP9JGn4Jq-hON7JFn4lhsgNAGSxixjQRxyDQFLPKqoxnBMbIzeUuANjfelORvoZ-LPxBbgZvMIPLbXDjVoXgQtJUqkgahdL7WgabmOLo1-z5rI3ta5GI-HYl0D7DEYeHlqNzPf2UAd69n4_ObB869b-cYrnPUFDhy1NSo-jogMY8njrOZn0Gatr1MZhOcYyOodPdyNzY2vNgSixjVTAUVFQX5Efg"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-secondary rounded-full border-2 border-surface-container-highest"></div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-on-surface truncate">Clara Higgins</h3>
+<span class="text-[10px] font-semibold text-on-surface-variant uppercase">14:22</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate font-medium">Are the Angus yearlings still available?</p>
+</div>
+</div>
+<!-- Conversation Item -->
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-high cursor-pointer transition-colors">
+<div class="shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="man in business casual attire with a blurred outdoor office background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCOr7IuhTkT8VH25CBgiuCRLVKK3d3Sm1FKoR9pNFSWQpQlHl_AR9p0k2_aPsMytDmSRCge2s4mAJyjdRxr3PcwYuDTJ9QwrLfaxhHPv9k9Qf6xSknlV-G-bJOTooixMyA2x64vXEToUbH7HKDDywr6dMfPx3X0ropjx3FcaE-rHf6xIuOhMgfixrB1B3ImfCqiN6k5ktE7E33YZBrIzyoprHmOGOPEgFQGk5b6ceiyDU9Np7BS2aeBLFeAzcniA77_-2FOHN_eD4"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-on-surface truncate">Marcus Thorne</h3>
+<span class="text-[10px] font-semibold text-on-surface-variant uppercase">Yesterday</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate">The transport has been scheduled for Friday.</p>
+</div>
+</div>
+<!-- Conversation Item -->
+<div class="flex items-center gap-4 p-4 rounded-xl hover:bg-surface-container-high cursor-pointer transition-colors">
+<div class="shrink-0">
+<img class="w-12 h-12 rounded-full object-cover" data-alt="smiling man in denim shirt against a rustic wooden background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzsnnKwnyggWx-L3fK-vBuScS6rYA2vwC89DTKsLSlR1XbT6h4y8OQC71eNU2ghT9C8U3Fdl1K7crWIoHRGL7ziw3kwHfCJt9UP2bZ4vuTCOeYy1O_NtRoF9eX7u3D3GmXD_WHEIIpOhhpUuSop7wnppDsdGOzfUZYYe0wSu_Si1kEdja1zabVoxtbVU1jbmjZCpFDcK9CQeZfYA1g8DegWWSYNe4NzCosY9JEf5uMf8nBQy5Jw7s4npvCfNoZIRXxRULRdRuIyho"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-baseline mb-1">
+<h3 class="font-bold text-on-surface truncate">Silas Vane</h3>
+<span class="text-[10px] font-semibold text-on-surface-variant uppercase">Oct 12</span>
+</div>
+<p class="text-sm text-on-surface-variant truncate">I've sent the health certificates over to your email.</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Chat Window -->
+<section class="flex-1 flex flex-col bg-surface relative">
+<!-- Chat Header & Context -->
+<header class="p-4 md:p-6 border-b border-outline-variant/15 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<button class="md:hidden p-2 rounded-full hover:bg-surface-container-high">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<div class="relative">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="portrait of a woman in agricultural attire outdoors" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDwnd394R2zg3fRSCQSBGm1GugUjjBZ8JoJQUYxoXEdl-IxSA20KljPV8iTwqLjGl8iZNTUs_IKQFEEwyLHgCNFaa90uBwh_ty6PnMG_OVGJlrQPiNukhQ3IV1MiHYM8PTenE4twhfhZvJOsdRO8os4yG40CkvXJSgehI15K_bjCXWtXlXMhdcNJjsstBGmCJmA36RkVWwLqjJqhpaqQyPbXpTNePyOgu7he0bWMwjvMh9Xk7KauA0o0DE3fUwsj1hRIJPcetIQ-k"/>
+<div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-secondary rounded-full border-2 border-surface"></div>
+</div>
+<div>
+<h2 class="font-headline font-bold text-on-surface text-lg leading-tight">Clara Higgins</h2>
+<p class="text-[10px] font-bold text-secondary uppercase tracking-wider">Online Now</p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full text-tertiary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">call</span>
+</button>
+<button class="p-2 rounded-full text-tertiary hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Animal Listing Thumbnail Header -->
+<div class="bg-surface-container-low p-3 rounded-2xl flex items-center gap-4 group cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="w-16 h-16 shrink-0 rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover transition-transform group-hover:scale-110 duration-500" data-alt="close up of a high-quality Black Angus bull standing in a green pasture during late afternoon sun" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDk67sztBFqUY1Ibi8JQOO5rlJn3JDGSkrFhLAaNo0RX-0f4dpBbZjeGyv8sy5Y2Ihwc70j633SIiVkH4bmVmjoL9ZrxLwFhRB1rv0F3k0_yg0CBEKmCkutrircYPw5ej9gjIL8nXeyOzmv-oPCcOn7LKQZVveTI1QsXpSohWvEVR2xKpFiwSM1SrX9rPk3ZjMfQnHN3MGGVcaHRbcGgCs1qrbWKD81mhb2XDqHbAMbN8_5x5tkVWrwRUf1pNyCENr60UC0gR3t2RQ"/>
+</div>
+<div class="flex-1">
+<h4 class="text-xs font-black uppercase tracking-widest text-on-surface-variant">In Discussion</h4>
+<p class="font-headline font-bold text-on-surface">Premium Black Angus Yearlings (x12)</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-sm font-bold text-primary">$2,450 / head</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-xs text-on-surface-variant">Verified Livestock</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</header>
+<!-- Message Area -->
+<div class="flex-1 overflow-y-auto p-4 md:p-8 space-y-6">
+<!-- Date Divider -->
+<div class="flex justify-center">
+<span class="px-4 py-1 rounded-full bg-surface-container text-[10px] font-bold text-on-surface-variant uppercase tracking-widest">Today</span>
+</div>
+<!-- Recipient Message -->
+<div class="flex items-end gap-3 max-w-[85%] md:max-w-[70%]">
+<div class="flex flex-col gap-1">
+<div class="bg-surface-container-highest text-on-surface p-4 rounded-2xl rounded-bl-none shadow-sm">
+<p class="text-sm leading-relaxed">Hello! I saw your listing for the Angus yearlings. Are they still available for viewing this Saturday morning?</p>
+</div>
+<span class="text-[10px] font-semibold text-on-surface-variant ml-1 uppercase">14:15</span>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex items-end gap-3 max-w-[85%] md:max-w-[70%] ml-auto flex-row-reverse">
+<div class="flex flex-col items-end gap-1">
+<div class="bg-primary text-on-primary p-4 rounded-2xl rounded-br-none shadow-md bg-gradient-to-br from-primary to-primary-container">
+<p class="text-sm leading-relaxed">Hi Clara! Yes, they are still available. Saturday at 10 AM works perfectly if that fits your schedule.</p>
+</div>
+<div class="flex items-center gap-1 mr-1">
+<span class="text-[10px] font-semibold text-on-surface-variant uppercase">14:18</span>
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 1;">done_all</span>
+</div>
+</div>
+</div>
+<!-- Photo Message (Recipient) -->
+<div class="flex items-end gap-3 max-w-[85%] md:max-w-[70%]">
+<div class="flex flex-col gap-1 w-full">
+<div class="bg-surface-container-highest p-2 rounded-2xl rounded-bl-none shadow-sm">
+<div class="rounded-xl overflow-hidden mb-2">
+<img class="w-full object-cover" data-alt="a professional agricultural document showing livestock health certifications on a wooden table" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFFrBC6VceEsfCg-dT1XYyx5jVbP7QkIvlz2c4_FO2c4EQNzrgy4M461DUwNKvgxUfNpejiqTWIUpArs4fes6fvIcB5EX-T7F8CsdMGE8CYUyKD8PTSbiSIk97_89WnhlcoYL3ogd-FKxAyZwWC-rU3Q0LHh-hwbU4Uc-863VE9EBmBbfNRX9ZpVrA22tSkPcc18Cppls5HIGzjym_-M6A1PEn8GVUQxUgeQBa4KBwDWgu2I2XJdBtS6z5OUJdOwuMA95om3FGxJ0"/>
+</div>
+<div class="px-2 pb-2">
+<p class="text-sm leading-relaxed">I've attached the health certificates for the herd we discussed last week. Let me know if you need the pedigrees as well.</p>
+</div>
+</div>
+<span class="text-[10px] font-semibold text-on-surface-variant ml-1 uppercase">14:20</span>
+</div>
+</div>
+<!-- Recipient Message -->
+<div class="flex items-end gap-3 max-w-[85%] md:max-w-[70%]">
+<div class="flex flex-col gap-1">
+<div class="bg-surface-container-highest text-on-surface p-4 rounded-2xl rounded-bl-none shadow-sm">
+<p class="text-sm leading-relaxed">That's great. I'll bring the trailer just in case we decide to move forward on the spot. Looking forward to it!</p>
+</div>
+<span class="text-[10px] font-semibold text-on-surface-variant ml-1 uppercase">14:22</span>
+</div>
+</div>
+</div>
+<!-- Message Input Area -->
+<footer class="p-4 md:px-8 md:pb-8">
+<div class="bg-surface-container-high rounded-full p-2 flex items-center gap-2 shadow-inner">
+<button class="p-3 rounded-full text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="p-3 rounded-full text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">image</span>
+</button>
+<input class="flex-1 bg-transparent border-none focus:ring-0 text-sm py-2 px-1" placeholder="Type your message..." type="text"/>
+<button class="p-3 rounded-full text-on-surface-variant hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined">sentiment_satisfied</span>
+</button>
+<button class="bg-primary text-on-primary p-3 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all bg-gradient-to-br from-primary to-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+</footer>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-lg z-50 rounded-t-3xl shadow-[0_-4px_20px_0_rgba(11,27,52,0.06)] md:hidden">
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-500 dark:hover:text-orange-300">
+<span class="material-symbols-outlined">storefront</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Market</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-500 dark:hover:text-orange-300">
+<span class="material-symbols-outlined">search</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Search</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-500 dark:hover:text-orange-300">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">List</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 rounded-2xl px-3 py-2 transition-transform scale-95 duration-150 ease-in-out">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Chats</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-500 dark:hover:text-orange-300">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Stats</span>
+</div>
+</nav>
+<!-- Desktop Navigation Side Anchors (Hidden on Mobile) -->
+<nav class="hidden md:block fixed left-6 top-1/2 -translate-y-1/2 space-y-8 z-50 pointer-events-none">
+<div class="pointer-events-auto bg-surface/80 backdrop-blur-md p-2 rounded-full shadow-lg border border-outline-variant/15 flex flex-col gap-4">
+<a class="p-3 rounded-full text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined">storefront</span>
+</a>
+<a class="p-3 rounded-full bg-primary text-on-primary shadow-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
+</a>
+<a class="p-3 rounded-full text-on-surface-variant hover:bg-primary-container hover:text-on-primary-container transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+</a>
+</div>
+</nav>
+</body></html>

@@ -1,0 +1,21 @@
+appId: com.agromarket.app
+---
+- launchApp
+- assertVisible: "Pastoral"
+- assertVisible: "Doğrulanmış üreticiler"
+
+# Onboarding -> phone
+- tapOn: "İleri"
+- tapOn: "İleri"
+- tapOn: "Başla"
+
+# Dev login shortcut (only __DEV__)
+- assertVisible: "Geliştirici olarak devam et"
+- tapOn: "Geliştirici olarak devam et"
+
+# Tabs smoke assertions
+- assertVisible: "Ana Sayfa"
+- assertVisible: "Ara"
+- assertVisible: "İlan ver"
+- assertVisible: "Mesajlar"
+- assertVisible: "Profil"

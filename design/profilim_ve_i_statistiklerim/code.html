@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#dfe8ff",
+                    "on-secondary-container": "#347000",
+                    "secondary-fixed-dim": "#8adb52",
+                    "on-primary-fixed-variant": "#891e00",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#ffdbd2",
+                    "inverse-on-surface": "#ecf0ff",
+                    "inverse-primary": "#ffb4a2",
+                    "inverse-surface": "#21314a",
+                    "outline-variant": "#e4beb5",
+                    "secondary-container": "#a2f569",
+                    "primary": "#af2900",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1b34",
+                    "primary-container": "#d63c10",
+                    "secondary": "#316b00",
+                    "surface-variant": "#d6e3ff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#a5f86b",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#5b403a",
+                    "tertiary": "#00609a",
+                    "on-tertiary-container": "#fdfcff",
+                    "primary-fixed-dim": "#ffb4a2",
+                    "on-background": "#0b1b34",
+                    "surface-dim": "#cbdafc",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#b32a00",
+                    "on-tertiary-fixed-variant": "#004a78",
+                    "outline": "#8f7068",
+                    "surface-container": "#e8eeff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#0a2000",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-highest": "#d6e3ff",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary-fixed-variant": "#245100",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-fixed": "#cfe5ff",
+                    "surface": "#f9f9ff",
+                    "tertiary-container": "#2b79b7",
+                    "on-primary-fixed": "#3c0800",
+                    "tertiary-fixed-dim": "#99cbff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Work Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Work Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar Component -->
+<header class="bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/10 dark:border-slate-800/10 shadow-sm sticky top-0 z-50 flex justify-between items-center w-full px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary/20">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="close-up portrait of a professional male rancher with a weathered face and kind eyes in warm outdoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4ffDIDTZP17uOEQObWnXDBTMFtPHMY7v4R2HeDzdtSs_hVv9Ufr90322Mpn8aftklMCKOH9ooobFV8MS5RMxpO6y1IYXbNqgQZ3_ISzIKsxlbKW0yCSNE1y0ailVkRlh4s-u41uPVvYXvzetzhTgC90FeTdaAvCIIAuD018u07po32fd0ravrF9QhAb7jHIsBYroGPM2LTAYzbAjR-r7VhScFOAc-uFfgXo9DtyCSkgqG9Tpo_SRkQLw2YIIWTuQ28GYeaxQeRWo"/>
+</div>
+<span class="text-2xl font-black text-slate-900 dark:text-slate-50 uppercase tracking-widest">The Pastoral</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-6xl mx-auto px-4 md:px-8 py-8 space-y-12">
+<!-- Profile Header Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-8 items-end">
+<div class="md:col-span-8">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded-full text-xs font-bold tracking-wider uppercase">Verified Seller</span>
+</div>
+<h1 class="text-5xl md:text-6xl font-black tracking-tighter text-on-surface mb-4">Alistair Graham</h1>
+<div class="flex flex-wrap gap-6 text-on-surface-variant font-medium">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">calendar_today</span>
+<span>Joined March 2021</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">star</span>
+<span class="text-on-surface font-bold">4.9</span>
+<span>(124 Reviews)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">location_on</span>
+<span>Highlands, Scotland</span>
+</div>
+</div>
+</div>
+<div class="md:col-span-4 flex md:justify-end gap-3">
+<button class="px-6 py-3 rounded-xl bg-surface-container-high text-on-surface font-bold hover:bg-surface-container-highest transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    Settings
+                </button>
+<button class="px-6 py-3 rounded-xl bg-primary text-on-primary font-bold shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+                    Support
+                </button>
+</div>
+</section>
+<!-- Stats Overview Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="md:col-span-1 bg-surface-container-low p-6 rounded-full flex flex-col justify-between h-40">
+<span class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Active Market Reach</span>
+<div>
+<span class="text-4xl font-black text-on-surface">2,840</span>
+<p class="text-secondary text-sm font-bold mt-1">↑ 12% this month</p>
+</div>
+</div>
+<div class="md:col-span-1 bg-surface-container-low p-6 rounded-full flex flex-col justify-between h-40">
+<span class="text-on-surface-variant font-bold text-xs uppercase tracking-widest">Total Asset Value</span>
+<div>
+<span class="text-4xl font-black text-on-surface">£84.2k</span>
+<p class="text-on-surface-variant text-sm mt-1">In active listings</p>
+</div>
+</div>
+<div class="md:col-span-2 bg-tertiary text-on-tertiary p-8 rounded-full flex items-center justify-between relative overflow-hidden group">
+<div class="relative z-10">
+<span class="font-bold text-xs uppercase tracking-widest opacity-80">Seller Performance</span>
+<h3 class="text-3xl font-black mt-2">Elite Tier Status</h3>
+<p class="mt-1 opacity-90">Top 5% of livestock traders this quarter</p>
+</div>
+<span class="material-symbols-outlined text-8xl opacity-10 absolute -right-4 -bottom-4 rotate-12 group-hover:rotate-0 transition-transform duration-500" data-icon="trending_up">trending_up</span>
+</div>
+</section>
+<!-- Listings Tabs & Filters -->
+<section class="space-y-8">
+<div class="flex items-center justify-between border-b border-outline-variant/15 pb-4">
+<div class="flex gap-8">
+<button class="text-on-surface font-black text-xl relative after:absolute after:-bottom-[18px] after:left-0 after:w-full after:h-1 after:bg-primary">Active Listings (3)</button>
+<button class="text-on-surface-variant font-bold text-xl hover:text-on-surface transition-colors">Expired Listings (14)</button>
+</div>
+<div class="hidden md:flex gap-4">
+<button class="flex items-center gap-2 text-sm font-bold text-on-surface-variant px-4 py-2 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-sm" data-icon="filter_list">filter_list</span>
+                        Filter
+                    </button>
+<button class="flex items-center gap-2 text-sm font-bold text-on-surface-variant px-4 py-2 rounded-lg bg-surface-container-low">
+<span class="material-symbols-outlined text-sm" data-icon="sort">sort</span>
+                        Latest
+                    </button>
+</div>
+</div>
+<!-- Listings Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Listing Item 1 -->
+<div class="bg-surface-container-lowest rounded-full overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="flex flex-col md:flex-row h-full">
+<div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+<img alt="Aberdeen Angus Bull" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="powerful black aberdeen angus bull standing in a verdant scottish pasture under soft morning mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9UJPl0eBjZAMreuM9r-_mxyNcDylqf4HbXgrbRicCNJyrl6wNYBfXQZrV6LqVXZ5jE55tz95KATt586gFZCzhzxZpMrSSF0XHCn8J4fX9DxVCtGi7dWIe-KU9-eeFSx1_TnbJWddVtPuvEwreyz_3CCgQCc4K4t5r4aL86B8-h41hOooEPCg78VFVw3BPXt6DxPWRZNj-rNmexT4noR85CSbJ_8FoyquIbEE74eg9xmr9hkm-aV2hhcvp7WaE3Vf7jcBdUffK7Pg"/>
+</div>
+<div class="md:w-2/3 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-2xl font-bold tracking-tight">Purebred Aberdeen Angus Bull</h4>
+<span class="bg-secondary-container/30 text-on-secondary-container px-2 py-1 rounded text-[10px] font-black uppercase tracking-tighter">Verified</span>
+</div>
+<div class="flex gap-4 text-sm font-medium text-on-surface-variant mb-4">
+<span>24 Months</span>
+<span>•</span>
+<span>850kg</span>
+</div>
+<!-- Spec Grid from Design System -->
+<div class="grid grid-cols-2 gap-2 mb-6">
+<div class="bg-surface-container-low p-3 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="visibility">visibility</span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Views</p>
+<p class="font-black">1,402</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="favorite">favorite</span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Saves</p>
+<p class="font-black">84</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/15 pt-4">
+<span class="text-2xl font-black text-primary">£4,200</span>
+<button class="text-tertiary font-bold text-sm flex items-center gap-1 hover:underline">
+                                    Edit Details
+                                    <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Listing Item 2 -->
+<div class="bg-surface-container-lowest rounded-full overflow-hidden group hover:shadow-xl transition-all duration-300">
+<div class="flex flex-col md:flex-row h-full">
+<div class="md:w-1/3 h-48 md:h-auto overflow-hidden">
+<img alt="Highland Heifers" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" data-alt="three ginger colored highland heifers with long shaggy hair in a moody mountain landscape with dramatic clouds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEHBQd8AuzLHtoVou3S4BR20l4q3HNOTy3aj9IvwZqy2nt6JiJYOSkA9LY1Uum_gVCfiUfCRsHdsbp_2o69xQBfWmgS0D_g0cFF8EDFNacMYIJS6K7mIMX4RuxcaodwG39StanjOP6w3L3D4dKnBmTigpe4-mKTABs1fCTRKevoUH146zZtbYFzaPpcLPXSMsdo9onZVYiB7KiohOB-faXRFb61x-qBhh2Wf7VbeNBUgdRmuhueXJ7n2jizGrvW3r-ImWZAwaP25E"/>
+</div>
+<div class="md:w-2/3 p-6 flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-2xl font-bold tracking-tight">Group of 5 Highland Heifers</h4>
+<span class="bg-surface-container-high text-on-surface-variant px-2 py-1 rounded text-[10px] font-black uppercase tracking-tighter">Premium</span>
+</div>
+<div class="flex gap-4 text-sm font-medium text-on-surface-variant mb-4">
+<span>18 Months</span>
+<span>•</span>
+<span>Mixed Weight</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mb-6">
+<div class="bg-surface-container-low p-3 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary" data-icon="visibility">visibility</span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Views</p>
+<p class="font-black">892</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-3 rounded-xl flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="favorite">favorite</span>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase font-bold">Saves</p>
+<p class="font-black">31</p>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center border-t border-outline-variant/15 pt-4">
+<span class="text-2xl font-black text-primary">£6,500</span>
+<button class="text-tertiary font-bold text-sm flex items-center gap-1 hover:underline">
+                                    Edit Details
+                                    <span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Management Section -->
+<section class="bg-slate-900 text-slate-100 rounded-3xl p-8 md:p-12 relative overflow-hidden">
+<div class="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+<div>
+<h2 class="text-4xl font-black tracking-tight mb-4 leading-tight">Elevate Your Listings with Premium Insights</h2>
+<p class="text-slate-400 text-lg mb-8 leading-relaxed">Access deep-dive analytics for your herd listings and compare your performance against regional market averages.</p>
+<button class="bg-primary hover:bg-primary-container px-8 py-4 rounded-xl font-black text-on-primary transition-colors flex items-center gap-3">
+                        Upgrade to Pro
+                        <span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</button>
+</div>
+<div class="bg-white/5 backdrop-blur-md border border-white/10 p-6 rounded-2xl">
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-sm font-bold text-slate-300">Listing Completeness</span>
+<span class="text-sm font-black text-secondary">92%</span>
+</div>
+<div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+<div class="w-[92%] h-full bg-secondary"></div>
+</div>
+<p class="text-xs text-slate-500 italic">Add 2 more high-resolution photos to reach 100%.</p>
+<div class="pt-4 border-t border-white/10">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 bg-tertiary/20 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="monitoring">monitoring</span>
+</div>
+<div>
+<p class="font-bold">Conversion Rate</p>
+<p class="text-xs text-slate-400">4.2% Inquiry Lead Rate</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Abstract background shape -->
+<div class="absolute -bottom-24 -right-24 w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
+</section>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-2 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-lg shadow-[0_-4px_20px_0_rgba(11,27,52,0.06)] z-50 rounded-t-3xl">
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-50 dark:hover:text-orange-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-50 dark:hover:text-orange-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-50 dark:hover:text-orange-300 transition-colors scale-125" href="#">
+<span class="material-symbols-outlined" data-icon="add_circle" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="hidden">Add</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-50 dark:hover:text-orange-300 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Chats</span>
+</a>
+<!-- Stats/Profile Active -->
+<a class="flex flex-col items-center justify-center bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 rounded-2xl px-3 py-2 transform active:scale-95 duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Stats</span>
+</a>
+</nav>
+</body></html>

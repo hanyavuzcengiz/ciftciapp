@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("LISTING_DATABASE_URL")
+}
+
+/// Sadece FK çözümü için; tam User modeli user-service sorumluluğunda.
+model User {
+  id       String    @id @db.Uuid
+  listings Listing[]
+
+  @@map("users")
+}
+
+/// Gateway’den gelen x-user-id (JWT sub, E.164 telefon).
+/// authorUuid: users tablosunda aynı telefonla kayıt varsa doldurulur.
+model Listing {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String   @map("user_id") @db.VarChar(20)
+  authorUuid  String?  @map("author_uuid") @db.Uuid
+  categoryId  String?  @map("category_id") @db.Uuid
+  title       String   @db.VarChar(150)
+  description String   @db.VarChar(2000)
+  listingType String   @map("listing_type")
+  price       Decimal  @db.Decimal(12, 2)
+  priceUnit   String   @map("price_unit") @db.VarChar(20)
+  attributesJson Json? @map("attributes_json")
+  locationJson   Json? @map("location_json")
+  status      String   @default("draft")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  author    User?     @relation(fields: [authorUuid], references: [id], onDelete: SetNull)
+  favorites Favorite[]
+
+  @@map("listings_app")
+}
+
+model Favorite {
+  userId    String  @map("user_id") @db.VarChar(20)
+  listingId String  @map("listing_id") @db.Uuid
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+
+  @@id([userId, listingId])
+  @@map("listing_favorites")
+}

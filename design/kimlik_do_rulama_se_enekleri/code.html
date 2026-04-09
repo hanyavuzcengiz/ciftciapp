@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kimlik Doğrulama | PASTORAL</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;800;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#00609a",
+                    "surface-container-high": "#dfe8ff",
+                    "on-surface-variant": "#5b403a",
+                    "surface-dim": "#cbdafc",
+                    "secondary": "#316b00",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#a2f569",
+                    "on-tertiary-container": "#fdfcff",
+                    "outline-variant": "#e4beb5",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#ffb4a2",
+                    "surface-container": "#e8eeff",
+                    "surface-container-highest": "#d6e3ff",
+                    "surface": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed-dim": "#8adb52",
+                    "tertiary-fixed-dim": "#99cbff",
+                    "on-primary-fixed-variant": "#891e00",
+                    "on-primary-fixed": "#3c0800",
+                    "tertiary-fixed": "#cfe5ff",
+                    "background": "#f9f9ff",
+                    "tertiary-container": "#2b79b7",
+                    "outline": "#8f7068",
+                    "surface-variant": "#d6e3ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#ffdbd2",
+                    "on-secondary-container": "#347000",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-container": "#d63c10",
+                    "on-tertiary-fixed-variant": "#004a78",
+                    "secondary-fixed": "#a5f86b",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#fffbff",
+                    "inverse-on-surface": "#ecf0ff",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#b32a00",
+                    "surface-container-low": "#f0f3ff",
+                    "on-surface": "#0b1b34",
+                    "on-background": "#0b1b34",
+                    "inverse-surface": "#21314a",
+                    "on-secondary-fixed-variant": "#245100",
+                    "on-secondary-fixed": "#0a2000",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#ffb4a2",
+                    "primary": "#af2900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Work Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .brand-font { font-family: 'Work Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-[#f9f9ff] dark:bg-slate-950 flex justify-between items-center px-6 h-16 w-full top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#af2900] dark:text-[#ff8a65] hover:opacity-80 transition-opacity cursor-pointer" data-icon="shield_person">shield_person</span>
+<span class="text-xl font-black text-[#0b1b34] dark:text-[#f9f9ff] tracking-widest font-['Work_Sans']">PASTORAL</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-surface-container-high hover:opacity-80 transition-opacity cursor-pointer">
+<img alt="User profile" data-alt="Close-up portrait of a professional male agronomist with a friendly expression, natural outdoor lighting, blurred rural background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUDHTrPQA-9cgw70d8ew7qxP0LCCNVzALsfYZiIT2PTlQoqQh2RyB_yoUXCfOJ2g0JeV-6qlRO86i8ZQ6_MZQFbovZp5bAnVN3kELUwremYRATge81sovjbuvXI3wYttgKZulOY8SVGqPoZg26dyroWLk6oxboDzLFXTaFQr34InKP8Uz8ufWOCYXJZ5rxoSIumNxTCGjL1Jypef1X5DL4zLiHSAfhYlIcFz9iRF4Rgg5axzcsCUQ55dSqpc879FBn36vQy6W4wyQ"/>
+</div>
+</header>
+<main class="flex-grow flex flex-col items-center justify-center px-4 py-8">
+<div class="max-w-4xl w-full grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+<!-- Left Editorial Section -->
+<div class="md:col-span-5 space-y-6">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/20 text-secondary font-semibold text-xs uppercase tracking-wider">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+                    Güvenli Pazar Yeri
+                </div>
+<h1 class="text-4xl md:text-5xl font-extrabold text-on-surface tracking-tight leading-tight">
+                    Kimliğinizi <span class="text-primary">Doğrulayın</span>
+</h1>
+<p class="text-on-surface-variant leading-relaxed text-lg">
+                    Pastoral topluluğunun güvenliğini sağlamak ve dolandırıcılığı önlemek amacıyla tüm kullanıcılarımızın kimlik doğrulaması yapması gerekmektedir.
+                </p>
+<div class="grid grid-cols-1 gap-4 mt-8">
+<div class="bg-surface-container-low p-4 rounded-xl flex gap-4">
+<span class="material-symbols-outlined text-tertiary" data-icon="health_and_safety">health_and_safety</span>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Veri Bütünlüğü</h4>
+<p class="text-on-surface-variant text-xs mt-1">Hayvan sağlığı verilerinin ve kayıtların doğruluğu garanti altına alınır.</p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl flex gap-4">
+<span class="material-symbols-outlined text-secondary" data-icon="gavel">gavel</span>
+<div>
+<h4 class="font-bold text-on-surface text-sm">Yasal Uyum</h4>
+<p class="text-on-surface-variant text-xs mt-1">Ticari işlemler T.C. Tarım ve Orman Bakanlığı regülasyonlarına uygun yürütülür.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Selection Section -->
+<div class="md:col-span-7 space-y-4">
+<!-- Active Option: e-Devlet -->
+<div class="group relative bg-surface-container-lowest p-6 rounded-xl border border-primary/20 shadow-[0_20px_40px_rgba(11,27,52,0.04)] cursor-pointer hover:shadow-xl transition-all duration-300">
+<div class="absolute -top-3 right-6 bg-gradient-to-r from-primary to-primary-container text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-tighter">
+                        En Hızlı ve Güvenli
+                    </div>
+<div class="flex items-start gap-5">
+<div class="w-14 h-14 rounded-xl bg-surface-container-high flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
+<span class="material-symbols-outlined text-3xl" data-icon="account_balance" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-xl font-bold text-on-surface">e-Devlet ile Doğrula</h3>
+<p class="text-on-surface-variant text-sm mt-1 leading-snug">
+                                T.C. Kimlik numaranızla saniyeler içinde doğrulama yapın. Belgeleriniz anında onaylanır.
+                            </p>
+<div class="mt-4 flex items-center text-primary font-bold text-sm gap-1 group-hover:gap-2 transition-all">
+                                Hemen Başlat <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Secondary Option: Manual -->
+<div class="group bg-surface-container-low p-6 rounded-xl cursor-pointer hover:bg-surface-container transition-colors duration-300">
+<div class="flex items-start gap-5">
+<div class="w-14 h-14 rounded-xl bg-white/50 flex items-center justify-center text-on-surface-variant group-hover:text-tertiary transition-colors">
+<span class="material-symbols-outlined text-3xl" data-icon="upload_file">upload_file</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-xl font-bold text-on-surface">Manuel Kimlik Yükleme</h3>
+<p class="text-on-surface-variant text-sm mt-1 leading-snug">
+                                Kimlik kartınızın fotoğrafını yükleyerek doğrulama yapın. Onay süreci 24-48 saat sürebilir.
+                            </p>
+<div class="mt-4 flex items-center text-on-surface-variant font-semibold text-sm gap-1">
+                                Belge Yükle <span class="material-symbols-outlined text-sm" data-icon="add_a_photo">add_a_photo</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Info Card -->
+<div class="mt-8 p-6 rounded-xl bg-surface-variant/30 backdrop-blur-sm border border-outline-variant/15 flex gap-4">
+<span class="material-symbols-outlined text-tertiary shrink-0" data-icon="info">info</span>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                        Verileriniz KVKK kapsamında korunmaktadır. Kimlik bilgileriniz yalnızca doğrulama amacıyla kullanılır ve üçüncü taraflarla asla paylaşılmaz. Pastoral, banka seviyesinde şifreleme altyapısı kullanmaktadır.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-[#d6e3ff]/70 dark:bg-slate-900/80 backdrop-blur-xl border-t border-[#e4beb5]/15 shadow-[0_-4px_24px_rgba(11,27,52,0.06)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-[#5b403a] dark:text-slate-400 px-4 py-1.5 hover:bg-[#f0f3ff]/50 transition-opacity active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px]">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#af2900] to-[#d63c10] text-white rounded-xl px-4 py-1.5 active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px]">Identity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5b403a] dark:text-slate-400 px-4 py-1.5 hover:bg-[#f0f3ff]/50 transition-opacity active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="gavel">gavel</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px]">Bids</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#5b403a] dark:text-slate-400 px-4 py-1.5 hover:bg-[#f0f3ff]/50 transition-opacity active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-['Work_Sans'] font-semibold text-[11px]">Profile</span>
+</a>
+</nav>
+</body></html>

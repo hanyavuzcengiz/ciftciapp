@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Şifre Değiştir - The Pastoral</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Work+Sans:wght@700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#e4beb5",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#ffb4a2",
+                    "surface-container": "#e8eeff",
+                    "secondary-fixed-dim": "#8adb52",
+                    "surface-container-highest": "#d6e3ff",
+                    "surface": "#f9f9ff",
+                    "error-container": "#ffdad6",
+                    "on-surface-variant": "#5b403a",
+                    "tertiary": "#00609a",
+                    "surface-container-high": "#dfe8ff",
+                    "surface-dim": "#cbdafc",
+                    "secondary": "#316b00",
+                    "on-error": "#ffffff",
+                    "secondary-container": "#a2f569",
+                    "on-tertiary-container": "#fdfcff",
+                    "primary-container": "#d63c10",
+                    "secondary-fixed": "#a5f86b",
+                    "on-error-container": "#93000a",
+                    "on-primary-container": "#fffbff",
+                    "inverse-on-surface": "#ecf0ff",
+                    "on-tertiary-fixed-variant": "#004a78",
+                    "on-background": "#0b1b34",
+                    "inverse-surface": "#21314a",
+                    "on-secondary-fixed-variant": "#245100",
+                    "error": "#ba1a1a",
+                    "surface-tint": "#b32a00",
+                    "surface-container-low": "#f0f3ff",
+                    "on-surface": "#0b1b34",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#ffb4a2",
+                    "primary": "#af2900",
+                    "on-secondary-fixed": "#0a2000",
+                    "tertiary-fixed-dim": "#99cbff",
+                    "on-primary-fixed-variant": "#891e00",
+                    "on-primary-fixed": "#3c0800",
+                    "background": "#f9f9ff",
+                    "tertiary-fixed": "#cfe5ff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#ffdbd2",
+                    "on-secondary-container": "#347000",
+                    "tertiary-container": "#2b79b7",
+                    "outline": "#8f7068",
+                    "surface-variant": "#d6e3ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-lowest": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Work Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Work Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-background min-h-screen">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-slate-50/70 backdrop-blur-md">
+<div class="flex items-center justify-between px-6 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center p-2 rounded-full hover:bg-slate-200/50 transition-colors active:opacity-80 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-orange-600" data-icon="arrow_back">arrow_back</span>
+</button>
+<span class="font-headline font-bold text-lg tracking-tight text-on-background">Şifre Değiştir</span>
+</div>
+<div class="text-2xl font-black text-orange-600 uppercase tracking-widest hidden md:block">
+                The Pastoral
+            </div>
+<div class="w-10"></div> <!-- Spacer for symmetry -->
+</div>
+</nav>
+<main class="pt-24 pb-12 px-6 max-w-xl mx-auto">
+<!-- Content Canvas -->
+<div class="space-y-8">
+<!-- Header Section -->
+<div class="space-y-2">
+<h2 class="text-3xl font-headline font-black text-on-background tracking-tight">Güvenliğinizi Güncelleyin</h2>
+<p class="text-on-surface-variant leading-relaxed">Hesabınızı güvende tutmak için şifrenizi düzenli aralıklarla değiştirmenizi öneririz.</p>
+</div>
+<!-- Asymmetric Decorative Element -->
+<div class="relative h-48 w-full rounded-xl overflow-hidden shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Modern high-security digital workspace with warm cinematic lighting and soft bokeh background of a rural ranch" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdKj85PTRcjlikG_qnIN-TGlGJM_cdL92nz_cR_qhGyJtkkmOgEi4RaNP2ZkcwDxUQKgbCjNxjefbZJI0nTBYkkkGWMXAMS2pVKjWs4s-3pp0RbrjBhb7ZignO5rlkR7XeWWHhWehuC-UNplsIoN2S_g8cvCAObswfLxXtV3boUAOTaTytzd376_pIJcMhxMrvJ75cfpckPjWwd8OrD0yYbrCEtuZP7vG5hWIt5M_H4kFs1YYTBMvkAjWLU8AnrypG0CokNtu6oeo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-on-background/60 to-transparent"></div>
+<div class="absolute bottom-4 left-4 text-white">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-orange-400" data-icon="shield_lock" style="font-variation-settings: 'FILL' 1;">shield_lock</span>
+<span class="text-xs font-bold uppercase tracking-widest">Uçtan Uca Koruma</span>
+</div>
+</div>
+</div>
+<!-- Change Password Form -->
+<form class="space-y-6">
+<!-- Current Password -->
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider ml-1">Mevcut Şifre</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-high border-none rounded-xl px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 cursor-pointer" data-icon="visibility">visibility</span>
+</div>
+<div class="flex justify-end pt-1">
+<a class="text-xs font-semibold text-tertiary hover:underline" href="#">Şifremi Unuttum</a>
+</div>
+</div>
+<!-- New Passwords Bento Group -->
+<div class="bg-surface-container-low p-6 rounded-xl space-y-6">
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider ml-1">Yeni Şifre</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-none rounded-xl px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" data-icon="lock">lock</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="block text-xs font-semibold text-on-surface-variant uppercase tracking-wider ml-1">Yeni Şifre (Tekrar)</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border-none rounded-xl px-4 py-4 text-on-surface focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="••••••••" type="password"/>
+<span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-400" data-icon="lock_reset">lock_reset</span>
+</div>
+</div>
+</div>
+<!-- Password Requirements Card -->
+<div class="bg-surface-container border-l-4 border-orange-500 p-4 rounded-r-xl">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-orange-600 shrink-0" data-icon="info">info</span>
+<div class="space-y-1">
+<p class="text-xs font-bold text-on-background uppercase tracking-tight">Güvenlik Gereksinimleri</p>
+<ul class="text-[11px] text-on-surface-variant space-y-1">
+<li>• En az 8 karakter uzunluğunda olmalı</li>
+<li>• Bir büyük harf ve bir rakam içermeli</li>
+<li>• En az bir özel karakter (!@#$%^&amp;*) içermeli</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Action Button -->
+<button class="w-full py-4 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 active:scale-95 transition-all duration-200" type="submit">
+                    Şifreyi Kaydet
+                </button>
+</form>
+</div>
+</main>
+<!-- BottomNavBar (Suppressed for focused task per rules) -->
+<!-- Navigation is suppressed because this is a focused "Change Password" sub-page -->
+</body></html>

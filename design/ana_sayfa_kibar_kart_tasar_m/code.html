@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Pastoral | Premium Livestock Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "primary": "#F04E23", // Terra Market Primary
+              "on-primary": "#ffffff",
+              "secondary": "#0B1B34", // Pastoral Deep Blue
+              "on-secondary": "#ffffff",
+              "surface": "#F9F9FF",
+              "on-surface": "#0B1B34",
+              "surface-variant": "#F0F3FF",
+              "on-surface-variant": "#5B403A",
+              "outline": "#E4BEB5",
+              "background": "#F9F9FF",
+              "error": "#BA1A1A",
+              "success": "#a2f569"
+            },
+            "borderRadius": {
+              "DEFAULT": "1rem", // Round Four corners
+              "lg": "1.25rem",
+              "xl": "1.5rem",
+              "2xl": "2rem",
+              "3xl": "2.5rem",
+              "full": "9999px"
+            },
+            "fontFamily": {
+              "headline": ["Work Sans"],
+              "body": ["Work Sans"],
+              "label": ["Work Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: 'Work Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased pb-24 md:pb-0">
+<!-- Header -->
+<header class="bg-surface/80 backdrop-blur-md w-full sticky top-0 z-50 border-b border-surface-variant">
+<div class="flex justify-between items-center px-6 h-20 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined text-3xl" data-icon="shield_person" style="font-variation-settings: 'wght' 400">shield_person</span>
+</button>
+<div class="text-2xl font-black text-secondary tracking-widest font-headline">PASTORAL</div>
+</div>
+<nav class="hidden md:flex gap-10 items-center">
+<a class="text-primary font-bold tracking-tight hover:opacity-80 transition-opacity" href="#">Market</a>
+<a class="text-on-surface-variant font-semibold tracking-tight hover:text-primary transition-colors" href="#">Identity</a>
+<a class="text-on-surface-variant font-semibold tracking-tight hover:text-primary transition-colors" href="#">Bids</a>
+</nav>
+<div class="flex items-center gap-5">
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined text-2xl" data-icon="notifications" style="font-variation-settings: 'wght' 400">notifications</span>
+<span class="absolute top-0 right-0 w-2.5 h-2.5 bg-primary rounded-full border-2 border-surface"></span>
+</button>
+<div class="w-11 h-11 rounded-xl bg-surface-variant overflow-hidden border border-outline/20">
+<img alt="User profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-PBPA7dpStzw19rveAttTg3zokMXkmirqIN4orHEiW4eM1xBAxaIVN3NnpucLUW_h2kt6cdAvlfSevU1HQlwuUiwGrp8pFanmzBZTI8SPFUxUxKwYqy7qHCxhNG_3FccDSCsN7lBCyPyF4CsujxqFa_p9edJgapI-6vwJ2tMTKCJu45Meu6N919Z5fqQAvKvXdVdT4pN5ehGrwtXTI6NijQBK6sIfaH9CXTm4dwxUJUw6do_SQnNYfDWGEQc8ZPobpiocvm1lFjk"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
+<!-- Hero Section -->
+<section class="relative rounded-3xl md:rounded-[48px] overflow-hidden min-h-[460px] flex flex-col items-center justify-center text-center p-8 bg-secondary/5">
+<div class="absolute inset-0 z-0">
+<img alt="premium cattle ranch" class="w-full h-full object-cover opacity-30 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpTRPR2AdfG908MeJ6Kwl7MkT6LKZZ2Gfisq8GJlKJDGS4plX7gGagFruJrmMM0GMO4fV2N58ZieyBLb-JZsxYxh5bEK1nMIk95rgKpYr-Y2AIQwO5EwkurCAjtmTBlwopwdaIgyTu6bPOQceFclpGIZhvFCHjABs22-aF7oNcNV3z_TxnkFGWRe4DubIxMx8m4po7LW9bvQaUXyxJ7V3cTQ39RsXbs1gpVEG7A0Xg49m7GoOyfFlNhazWu0YLcs7AmKqmRsfmyZI"/>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-surface"></div>
+</div>
+<div class="relative z-10 w-full max-w-3xl px-4">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-secondary mb-8 tracking-tight leading-tight">Güvenilir Canlı Hayvan Ticareti</h1>
+<div class="bg-white rounded-2xl md:rounded-full shadow-2xl p-2.5 flex flex-col md:flex-row items-stretch md:items-center gap-2 border border-outline/10">
+<div class="flex items-center flex-1 px-5 py-3">
+<span class="material-symbols-outlined text-secondary/40 mr-4" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-secondary placeholder:text-secondary/40 font-medium text-lg" placeholder="Cins, bölge veya yaş ile ara..." type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-12 py-4 rounded-xl md:rounded-full font-bold text-lg hover:brightness-110 transition-all active:scale-95 shadow-xl shadow-primary/20">Arama Yap</button>
+</div>
+</div>
+</section>
+<!-- Categories -->
+<section>
+<div class="mb-10 text-center md:text-left">
+<h2 class="font-headline font-extrabold text-3xl md:text-4xl text-secondary tracking-tight">Kategoriler</h2>
+<p class="text-on-surface-variant font-medium mt-2">Özel seçilmiş hayvan gruplarına göz atın</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+<!-- Category Item 1 -->
+<div class="group relative aspect-[4/5] bg-surface-variant rounded-2xl overflow-hidden transition-all hover:-translate-y-2 cursor-pointer shadow-sm hover:shadow-xl">
+<img alt="cattle" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkDwMXpIBOl3x2sKhZuGTjez3ZJqdBHbVDKlHBm2wjqkm0LZOxex7xkwTnN0N-ANEDvhZPK_TUxS0jYrK2Z3mnwzPx2DHo1ynBru7oMOh2puWYxGUr1C_AbrJkNKaUQIa2LWlU-Hz9cvWwwZ8CYdze2XGsufe9Fs4BwL5x0LZiCIylFif-72OIinCihitav37tNo6RQubronc69b7Bd6Gb-tctU-N2DgmGT1Q4m3cjWJTBAamgW9Cpp6O8wj8StoHys-mq-WpYdRw"/>
+<div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<p class="text-white font-headline font-bold text-2xl">Büyükbaş</p>
+<p class="text-white/70 text-xs font-semibold tracking-wider mt-1 uppercase">1,240 İlan</p>
+</div>
+</div>
+<!-- Category Item 2 -->
+<div class="group relative aspect-[4/5] bg-surface-variant rounded-2xl overflow-hidden transition-all hover:-translate-y-2 cursor-pointer shadow-sm hover:shadow-xl">
+<img alt="sheep" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3c2iIWpgBjSBkTbZ1m09VnD1tr_lGTfxW5GCY7Rp0nz8QLhtheRqNthNWNQzrMiuX93P8ELCcOSLsRBs3D6lq8q5D2iMtf6T65EcePyY5WxHdTdixxBX7f4q_7t2kkss1khy8p6T1ubP2tdElfsZL0ZtoazP-MEVumO1bJ_9OM6cLqfE9u6e59TzIw7vaCG2ty47XKnES2KBjcDbDIpmVnQNy_ZsusXcaZTPzu69V5zP6feVnfQfFIR4-aE11lITgo2CQOhdOzsg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<p class="text-white font-headline font-bold text-2xl">Küçükbaş</p>
+<p class="text-white/70 text-xs font-semibold tracking-wider mt-1 uppercase">840 İlan</p>
+</div>
+</div>
+<!-- Category Item 3 -->
+<div class="group relative aspect-[4/5] bg-surface-variant rounded-2xl overflow-hidden transition-all hover:-translate-y-2 cursor-pointer shadow-sm hover:shadow-xl">
+<img alt="goat" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAspfg12ecMoyKY5Tos4Z4f4AdSv6fdZJLUAf33W0xmYBbUmWmg9K3Z6himi7MEC44TOBAMTO5axKWMn0NrRt3F6kxM1csc_a_fmsOMu9JKeJlNSaEJRZ0ihXlRqV0pS5R4REEZgdoym1urs_ONyDBQ0-Iau2kz8Tea8KPmie-EEtMKDbh-vXaPVIrPRYgCQzdFXW-qtQ2SHDBdy_Aq6akT7MKLHGF5CFTXjUl1O0BOSEZKLA5ls4-5_2-rdkuZLLQNLrygBLLnY8w"/>
+<div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<p class="text-white font-headline font-bold text-2xl">Keçi</p>
+<p class="text-white/70 text-xs font-semibold tracking-wider mt-1 uppercase">520 İlan</p>
+</div>
+</div>
+<!-- Category Item 4 -->
+<div class="group relative aspect-[4/5] bg-surface-variant rounded-2xl overflow-hidden transition-all hover:-translate-y-2 cursor-pointer shadow-sm hover:shadow-xl">
+<img alt="poultry" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIczKGqxLwm7C3jUhfOGEAUSUzfMy_lLuSCsp3tffWoxNuV8A8PzAP4WVmS-Sd1s3fYFx9b9jWS2AV6QmjQSi0O3F6aNNvanHXDIxr8YbE4I_0gbbrVX3hH_AL8OGyWBWDM0JeCF90e-2O_NaUAsWNmlnxyPlKBzi_S8-1YrajftdODKvBKunsgeBmB-3zukAOpWwQsb9nGERpb6UV18QATWdSL7tuCKzrXlFcDPf3DGg2ppOMa_n53CLhjXYAchcoXG6j74YUMVE"/>
+<div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<p class="text-white font-headline font-bold text-2xl">Kümes</p>
+<p class="text-white/70 text-xs font-semibold tracking-wider mt-1 uppercase">3,100 İlan</p>
+</div>
+</div>
+<!-- Category Item 5 -->
+<div class="group relative aspect-[4/5] bg-surface-variant rounded-2xl overflow-hidden transition-all hover:-translate-y-2 cursor-pointer shadow-sm hover:shadow-xl">
+<img alt="horse" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfdxxlm2vdyCS31QIQ2G2Dkr_gz-iUOHOMr21hnzN_2hjEV6KsbWzTD9dSa5CYd8I_g_ju70Oeg9T2A6pshGE9y9RSc0z8Szjo2uKlCB5PXrZMcnPhM13garVfFdnz0m-IxzwNsP4VClssaWbf_wJ7LU-OtXRfw9AI7hq4awDBqhVn4ynxWohfylW6kLEYnpbJDOlly9a-4L4N6j3aAmXxSNz4X_qTGuKeKRoqP0x5SOPlIZA7ywYpIGU_ORg1p83ZQ5VK5VXp5y0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-secondary/90 via-secondary/20 to-transparent"></div>
+<div class="absolute bottom-6 left-6">
+<p class="text-white font-headline font-bold text-2xl">At</p>
+<p class="text-white/70 text-xs font-semibold tracking-wider mt-1 uppercase">120 İlan</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Vitrin İlanları -->
+<section>
+<div class="flex justify-between items-center mb-8">
+<h2 class="font-headline font-extrabold text-3xl text-secondary tracking-tight">Vitrin İlanları</h2>
+<a class="text-primary font-bold text-sm flex items-center gap-1.5 hover:underline" href="#">Tümünü Gör <span class="material-symbols-outlined text-lg">arrow_right_alt</span></a>
+</div>
+<div class="flex overflow-x-auto gap-8 pb-8 hide-scrollbar -mx-4 px-4 snap-x">
+<div class="flex-none w-80 snap-start bg-white rounded-2xl overflow-hidden shadow-sm border border-outline/10 hover:shadow-xl transition-all">
+<div class="relative aspect-video">
+<img alt="dairy cow" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7fGgREVi6z5WKUKPqP7UI4We6ncmacfgqIAs0UcTCGNe9wbISixQeOAWCj_YrNM_85LY9klSxLuZ7x6RWRCedc3xDJoeWgrVaHFTwsrs-KBg3bKvg0CfKW8zWaw3gd3OQHGPGUiEiuq8r1_ER_dfN_F2eTSjLtXiR3BeZPBORliMjTdL9rgBstVT96mm19rrTmdV2bvO-3r7dxT5ZifsJBvQvHWWM25cYzKDT3wr6jMYwcpscsgpwm0tCa-va79N2DUVnKCJ7JG0"/>
+<span class="absolute top-4 right-4 bg-primary text-white text-[10px] font-black px-3 py-1.5 rounded-lg uppercase tracking-widest shadow-lg">Vitrin</span>
+</div>
+<div class="p-6">
+<h3 class="font-headline font-bold text-lg text-secondary truncate">Holstein Süt Verimi Yüksek</h3>
+<p class="text-primary font-extrabold text-2xl mt-2">₺45.500</p>
+<div class="flex items-center gap-2 text-on-surface-variant font-medium text-xs mt-4">
+<span class="material-symbols-outlined text-sm" data-icon="location_on">location_on</span>
+<span>Konya, Türkiye</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Tüm İlanlar -->
+<section class="space-y-10">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<h2 class="font-headline font-extrabold text-3xl text-secondary tracking-tight">Tüm İlanlar</h2>
+<div class="flex gap-3 overflow-x-auto hide-scrollbar pb-2">
+<button class="px-6 py-2.5 bg-primary text-on-primary rounded-xl text-sm font-bold shadow-md shadow-primary/20 whitespace-nowrap">En Yeniler</button>
+<button class="px-6 py-2.5 bg-white text-secondary/60 border border-outline/20 rounded-xl text-sm font-semibold hover:bg-surface-variant whitespace-nowrap transition-colors">Fiyat: Azalan</button>
+<button class="px-6 py-2.5 bg-white text-secondary/60 border border-outline/20 rounded-xl text-sm font-semibold hover:bg-surface-variant whitespace-nowrap transition-colors">Kilo Aralığı</button>
+<button class="px-6 py-2.5 bg-white text-secondary/60 border border-outline/20 rounded-xl text-sm font-semibold hover:bg-surface-variant whitespace-nowrap transition-colors">Konum</button>
+</div>
+</div>
+<div class="flex flex-col gap-8">
+<!-- Product Card 1 -->
+<div class="group bg-white rounded-2xl flex flex-col md:flex-row overflow-hidden border border-outline/15 hover:border-primary/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+<!-- Image Section -->
+<div class="md:w-[420px] h-72 md:h-auto overflow-hidden relative">
+<img alt="Simmental cows" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8QEsAD7Xr3NabVAkwgDXKA9uDtdypv9rK92Eg5G9HQ-HJ4NfY442Sbt7PwYCSeirKLXuw2-R4zjhu_0cw-cgni_FJOzCSe9FWS0vkiBnv3XRF8ohjat1_8ZcJ9ZmrNympH3VVO8pRuS-Seu0LdaOhyz4y7KF0N74SbR2b4KRE9xJedZswCivYKOuPGEH1WVLiheOYOCFmRAkbUCknz9Z1jJOuPWtWWsr_WGf5R6637ecTtNtyMe9YLGUuN3MfFmVzAQSFlO4A7OU"/>
+<button class="absolute top-5 right-5 w-11 h-11 rounded-xl bg-white/90 backdrop-blur-md flex items-center justify-center text-secondary/60 hover:text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+<div class="absolute bottom-5 left-5">
+<span class="bg-secondary/70 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">photo_camera</span> 8 Fotoğraf
+                        </span>
+</div>
+</div>
+<!-- Content Section -->
+<div class="flex-1 p-6 md:p-8 flex flex-col">
+<div class="flex flex-col lg:flex-row justify-between items-start gap-4 mb-8">
+<div class="flex-1 space-y-2">
+<div class="flex items-center gap-3">
+<span class="bg-primary/10 text-primary text-[10px] font-black px-2.5 py-1 rounded-md uppercase tracking-wider">Acil Satılık</span>
+<span class="text-on-surface-variant text-[11px] font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 2 saat önce
+                                </span>
+</div>
+<h3 class="font-headline font-extrabold text-2xl text-secondary leading-tight">Damızlık Simmental Düve Grubu (12 Adet)</h3>
+</div>
+<div class="lg:text-right">
+<p class="text-primary font-black text-3xl tracking-tight">₺620.000</p>
+<p class="text-[10px] text-secondary/40 font-bold uppercase tracking-widest mt-1">Nakit / Havale</p>
+</div>
+</div>
+<!-- Info Grid -->
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="scale">scale</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">AĞIRLIK</p>
+<p class="text-sm font-bold text-secondary">480kg avg</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="calendar_month">calendar_month</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">YAŞ</p>
+<p class="text-sm font-bold text-secondary">24 Ay</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="pets">pets</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">CİNS</p>
+<p class="text-sm font-bold text-secondary">Simmental</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="tag">tag</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">KÜPE NO</p>
+<p class="text-sm font-bold text-secondary">TR-25010</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="location_on">location_on</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">KONUM</p>
+<p class="text-sm font-bold text-secondary">Erzurum</p>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<div class="mt-auto flex items-center justify-between border-t border-surface-variant pt-6 h-16">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl bg-surface-variant border-2 border-white shadow-sm overflow-hidden">
+<img alt="Seller" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-PBPA7dpStzw19rveAttTg3zokMXkmirqIN4orHEiW4eM1xBAxaIVN3NnpucLUW_h2kt6cdAvlfSevU1HQlwuUiwGrp8pFanmzBZTI8SPFUxUxKwYqy7qHCxhNG_3FccDSCsN7lBCyPyF4CsujxqFa_p9edJgapI-6vwJ2tMTKCJu45Meu6N919Z5fqQAvKvXdVdT4pN5ehGrwtXTI6NijQBK6sIfaH9CXTm4dwxUJUw6do_SQnNYfDWGEQc8ZPobpiocvm1lFjk"/>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-[#4CAF50] text-white w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
+<span class="material-symbols-outlined text-[10px] font-black" style="font-variation-settings: 'wght' 900">check</span>
+</div>
+</div>
+<div>
+<span class="text-sm font-bold text-secondary block">Ahmet Aksoy Hayvancılık</span>
+<span class="text-[10px] font-extrabold text-[#4CAF50] flex items-center gap-1 uppercase tracking-tighter mt-0.5">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'wght' 700">verified</span> Onaylı Satıcı
+                                </span>
+</div>
+</div>
+<button class="bg-success text-secondary h-full px-8 rounded-xl font-bold text-sm hover:brightness-105 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'wght' 400">chat</span> İletişime Geç
+                        </button>
+</div>
+</div>
+</div>
+<!-- Product Card 2 -->
+<div class="group bg-white rounded-2xl flex flex-col md:flex-row overflow-hidden border border-outline/15 hover:border-primary/40 shadow-sm hover:shadow-2xl transition-all duration-300">
+<div class="md:w-[420px] h-72 md:h-auto overflow-hidden relative">
+<img alt="Merino sheep" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-R4LV0J74BlfNzArL9QD1s7_afVdiWuDew8Q7vsyBbZtNnPnDveWmuiA0Vii5vRvMGjaylgqM2wNAu57K4evjdDhHhmp9ZqcDwoKLkVo3xsHzW7eWIO3maRd826xdYJyznnk6njMGnvkveyUlGEPOEg8Mp31COFAM8oZ4a7VN0O9S3NfQNTbt8ME7jdN5EOsNtdBkNoZ-h1H9ryePRfOh2sfXt2h7h7dpOLMwXKgyzonjGGQYSTT_hoeiMh3bJIfZZOE-WixyLgQ"/>
+<button class="absolute top-5 right-5 w-11 h-11 rounded-xl bg-white/90 backdrop-blur-md flex items-center justify-center text-secondary/60 hover:text-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+</button>
+</div>
+<div class="flex-1 p-6 md:p-8 flex flex-col">
+<div class="flex flex-col lg:flex-row justify-between items-start gap-4 mb-8">
+<div class="flex-1 space-y-2">
+<div class="text-on-surface-variant text-[11px] font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 5 saat önce
+                            </div>
+<h3 class="font-headline font-extrabold text-2xl text-secondary leading-tight">Yüksek Yün Kaliteli Merinos Koyunlar (50 Adet)</h3>
+</div>
+<div class="lg:text-right">
+<p class="text-primary font-black text-3xl tracking-tight">₺245.000</p>
+<p class="text-[10px] text-secondary/40 font-bold uppercase tracking-widest mt-1">Toplu Satış</p>
+</div>
+</div>
+<div class="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-8">
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="scale">scale</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">AĞIRLIK</p>
+<p class="text-sm font-bold text-secondary">65kg avg</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="calendar_month">calendar_month</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">YAŞ</p>
+<p class="text-sm font-bold text-secondary">18 Ay</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="pets">pets</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">CİNS</p>
+<p class="text-sm font-bold text-secondary">Merinos</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="tag">tag</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">KÜPE NO</p>
+<p class="text-sm font-bold text-secondary">AF-0312</p>
+</div>
+</div>
+<div class="bg-primary/[0.03] border border-primary/5 p-4 rounded-xl flex flex-col items-center text-center gap-1.5">
+<span class="material-symbols-outlined text-primary/60 text-lg" data-icon="location_on">location_on</span>
+<div class="space-y-0">
+<p class="text-[9px] text-secondary/50 font-semibold uppercase tracking-widest">KONUM</p>
+<p class="text-sm font-bold text-secondary">Afyon</p>
+</div>
+</div>
+</div>
+<div class="mt-auto flex items-center justify-between border-t border-surface-variant pt-6 h-16">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-12 h-12 rounded-xl bg-surface-variant flex items-center justify-center border border-outline/10 overflow-hidden">
+<span class="material-symbols-outlined text-primary/60 text-3xl">agriculture</span>
+</div>
+<div class="absolute -bottom-1 -right-1 bg-[#4CAF50] text-white w-5 h-5 rounded-full flex items-center justify-center border-2 border-white">
+<span class="material-symbols-outlined text-[10px] font-black" style="font-variation-settings: 'wght' 900">check</span>
+</div>
+</div>
+<div>
+<span class="text-sm font-bold text-secondary block">Merinos Agrosistem</span>
+<span class="text-[10px] font-extrabold text-[#4CAF50] flex items-center gap-1 uppercase tracking-tighter mt-0.5">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'wght' 700">verified</span> Onaylı Satıcı
+                                </span>
+</div>
+</div>
+<button class="bg-success text-secondary h-full px-8 rounded-xl font-bold text-sm hover:brightness-105 transition-all active:scale-95 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'wght' 400">chat</span> İletişime Geç
+                        </button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center pt-10">
+<button class="bg-white border-2 border-outline/20 text-secondary font-extrabold px-16 py-5 rounded-2xl hover:bg-surface-variant hover:border-primary transition-all shadow-sm active:scale-95">
+                Daha Fazla İlan Yükle
+            </button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-surface/80 backdrop-blur-xl border-t border-outline/10 shadow-[0_-8px_32px_rgba(0,0,0,0.05)] md:hidden">
+<a class="flex flex-col items-center justify-center text-primary group active:scale-90 duration-200" href="#">
+<div class="bg-primary/10 p-2 rounded-xl mb-1 group-active:bg-primary group-active:text-white transition-colors">
+<span class="material-symbols-outlined fill text-2xl">storefront</span>
+</div>
+<span class="font-semibold text-[10px] uppercase tracking-widest">Market</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">fingerprint</span>
+<span class="font-semibold text-[10px] uppercase tracking-widest">Identity</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">gavel</span>
+<span class="font-semibold text-[10px] uppercase tracking-widest">Bids</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined text-2xl mb-1">account_circle</span>
+<span class="font-semibold text-[10px] uppercase tracking-widest">Profile</span>
+</a>
+</nav>
+<!-- FAB for Desktop -->
+<button class="hidden md:flex fixed bottom-12 right-12 bg-primary text-white px-10 h-16 rounded-2xl items-center justify-center shadow-2xl hover:brightness-110 transition-all active:scale-95 group z-40 font-bold">
+<span class="material-symbols-outlined text-2xl mr-3" style="font-variation-settings: 'wght' 400">add_circle</span>
+    Yeni İlan Oluştur
+</button>
+</body></html>

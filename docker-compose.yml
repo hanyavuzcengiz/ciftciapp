@@ -1,0 +1,90 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgis/postgis:16-3.4
+    environment:
+      POSTGRES_USER: agromarket
+      POSTGRES_PASSWORD: agromarket
+      POSTGRES_DB: agromarket
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U agromarket -d agromarket"]
+      interval: 3s
+      timeout: 5s
+      retries: 15
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  mongodb:
+    image: mongo:7
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodata:/data/db
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.6.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+
+  kafka:
+    image: confluentinc/cp-kafka:7.6.1
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  ai-python:
+    build:
+      context: ./services/ai-service/python
+    ports:
+      - "8010:8000"
+    environment:
+      PYTHONUNBUFFERED: "1"
+
+  listing-service:
+    build:
+      context: .
+      dockerfile: services/listing-service/Dockerfile
+    # Üretimde yalnızca cluster içi erişim; yerelde localhost’a sabitleyin.
+    ports:
+      - "127.0.0.1:3002:3002"
+    environment:
+      LISTING_DATABASE_URL: postgresql://agromarket:agromarket@postgres:5432/agromarket
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      PORT: "3002"
+      CORS_ORIGINS: "*"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: on-failure
+
+volumes:
+  pgdata:
+  mongodata:

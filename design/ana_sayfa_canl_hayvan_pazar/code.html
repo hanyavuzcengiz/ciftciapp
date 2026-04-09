@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Pastoral | Terra Market</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#dfe8ff",
+                    "on-secondary-container": "#347000",
+                    "secondary-fixed-dim": "#8adb52",
+                    "on-primary-fixed-variant": "#891e00",
+                    "on-tertiary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "surface-bright": "#f9f9ff",
+                    "primary-fixed": "#ffdbd2",
+                    "inverse-on-surface": "#ecf0ff",
+                    "inverse-primary": "#ffb4a2",
+                    "inverse-surface": "#21314a",
+                    "outline-variant": "#e4beb5",
+                    "secondary-container": "#a2f569",
+                    "primary": "#af2900",
+                    "on-error": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#0b1b34",
+                    "primary-container": "#d63c10",
+                    "secondary": "#316b00",
+                    "surface-variant": "#d6e3ff",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#a5f86b",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#5b403a",
+                    "tertiary": "#00609a",
+                    "on-tertiary-container": "#fdfcff",
+                    "primary-fixed-dim": "#ffb4a2",
+                    "on-background": "#0b1b34",
+                    "surface-dim": "#cbdafc",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-tint": "#b32a00",
+                    "on-tertiary-fixed-variant": "#004a78",
+                    "outline": "#8f7068",
+                    "surface-container": "#e8eeff",
+                    "on-error-container": "#93000a",
+                    "on-secondary-fixed": "#0a2000",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-container-highest": "#d6e3ff",
+                    "on-tertiary-fixed": "#001d34",
+                    "on-secondary-fixed-variant": "#245100",
+                    "on-secondary": "#ffffff",
+                    "background": "#f9f9ff",
+                    "tertiary-fixed": "#cfe5ff",
+                    "surface": "#f9f9ff",
+                    "tertiary-container": "#2b79b7",
+                    "on-primary-fixed": "#3c0800",
+                    "tertiary-fixed-dim": "#99cbff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "fontFamily": {
+                    "headline": ["Work Sans"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Work Sans', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-slate-200/10 dark:border-slate-800/10 shadow-sm flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="professional male profile portrait with warm natural lighting and soft blurred background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcnqH2tGZGCtmUDpMCCvNzyi-J5wl7jxAr4syEiBf1QKxBA3-6SS8gSEm9dgX_r4nMz85I1YMDgnwaJl5Zp0YMGtYYABZ952IYVtT40fx7VGsS1RcS9WcJVL7iF4EwAG2MZKdcCOpVBF_ayGAa_3JL3s1wIFRB3fd2tdN_2NIXPxLBL6ax4s0CIR9xaSq3rhBnkb-fsCzfwOYTQt6pe4qZOlHyzqF3Du7Veva1f_-Ht5VEL_CcNqyhnkhZ0kdd8ylW5wDYMzYXlTU"/>
+</div>
+<span class="text-2xl font-black text-slate-900 dark:text-slate-50 uppercase tracking-widest">The Pastoral</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors scale-95 active:scale-90 transition-transform">
+<span class="material-symbols-outlined text-slate-500">notifications</span>
+</button>
+</div>
+</header>
+<main class="mt-24 px-6 max-w-7xl mx-auto">
+<!-- Search Section -->
+<section class="mb-8">
+<div class="relative group">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-outline">search</span>
+</div>
+<input class="w-full bg-surface-container-high border-none rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary/20 placeholder-on-surface-variant font-body" placeholder="Search premium livestock..." type="text"/>
+</div>
+</section>
+<!-- Category Horizontal List -->
+<section class="mb-10 overflow-x-auto no-scrollbar -mx-6 px-6">
+<div class="flex gap-4">
+<button class="flex-shrink-0 px-6 py-3 rounded-full bg-primary-container text-on-primary-container font-bold flex items-center gap-2 shadow-sm transition-transform active:scale-95">
+<span class="material-symbols-outlined">agriculture</span>
+<span class="font-headline tracking-tight">Large Cattle</span>
+</button>
+<button class="flex-shrink-0 px-6 py-3 rounded-full bg-surface-container-low text-on-surface-variant font-semibold flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">eco</span>
+<span class="font-headline tracking-tight">Small Cattle</span>
+</button>
+<button class="flex-shrink-0 px-6 py-3 rounded-full bg-surface-container-low text-on-surface-variant font-semibold flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">flutter_dash</span>
+<span class="font-headline tracking-tight">Poultry</span>
+</button>
+<button class="flex-shrink-0 px-6 py-3 rounded-full bg-surface-container-low text-on-surface-variant font-semibold flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined">raven</span>
+<span class="font-headline tracking-tight">Birds</span>
+</button>
+</div>
+</section>
+<!-- Featured Section Headline -->
+<div class="flex items-baseline justify-between mb-6">
+<h2 class="text-3xl font-black tracking-tight text-on-surface uppercase">Featured Assets</h2>
+<button class="text-tertiary font-semibold text-sm hover:underline">View All</button>
+</div>
+<!-- Asymmetric Bento Grid for Listings -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Hero Listing (Large) -->
+<div class="md:col-span-8 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group">
+<div class="relative h-80">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="majestic black angus bull standing in lush green field at dawn with misty morning dew and soft light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADBjn7_Xi0YiNuizzLsg4JC8Wd5FCpUnW-RfGqLOmlUudAYSGEt4JksEHpOStjqP2ZEp7z5XreY5GGtUT3OAFiSwhJP8B8s_vXaRIG9LWH7WzKWtlfryzet9W3IYOnHmYrYmTIBk6vVj6gb8zE8Fpn-MjW9lHYIF6nCb4c-cCccAQK5CQ4wSo_jVI1_JnlCRPNwTKimTlo51qqBgCQu8vy7X2zZCQThYMczhVBeVfTFw2e2E36Cr4IKSeJbvyffingYST7KjNc8T0"/>
+<div class="absolute top-4 left-4 bg-secondary/90 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                        VERIFIED BREEDER
+                    </div>
+</div>
+<div class="p-6">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="text-2xl font-bold text-on-surface mb-1">Champion Angus Bull</h3>
+<div class="flex items-center gap-1 text-on-surface-variant text-sm">
+<span class="material-symbols-outlined text-sm">location_on</span>
+<span>Canterbury, NZ</span>
+</div>
+</div>
+<div class="text-right">
+<span class="block text-2xl font-black text-primary">$12,450</span>
+<span class="text-xs text-on-surface-variant uppercase font-bold tracking-widest">Premium Asset</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-low p-3 rounded-lg text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase mb-1">Weight</span>
+<span class="text-sm font-bold">850 kg</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase mb-1">Age</span>
+<span class="text-sm font-bold">24 Mo</span>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg text-center">
+<span class="block text-xs font-bold text-on-surface-variant uppercase mb-1">Health</span>
+<span class="text-sm font-bold text-secondary">A+ Class</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Listings (Medium) -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<!-- Small Listing 1 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group">
+<div class="relative h-44">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="close up of a white suffolk sheep in a pasture during sunset with golden backlighting on its wool" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAr-u_NxGtGf4DhZt1JhW3su2sj5H9UueVavkctx12DnRT89TvpkJNMwVSPW_zlkHkfXWdQxTV-DLBpQh_wHuMJtI0A1e5AUxkpgO0_AgDBGG5zj0ZoOu0RkcujMDG-phkRw3g2Q0eMMmRk6GxecZpEWDY5YS9J4DDZXImcVoPeOgTLMWa0s3kjUYl8ihR1jSh5glhzABQB_SxOajqTWIgvbbNambKHYgsmtYrNA9s5Lk1HguSjYDi24XEBVaasPLXATT19CQotcoo"/>
+<div class="absolute bottom-2 right-2 bg-slate-950/40 backdrop-blur-md text-white px-2 py-1 rounded-lg text-[10px] font-bold">
+                            NEW LISTING
+                        </div>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-on-surface mb-1">Suffolk Ram Pack</h4>
+<div class="flex justify-between items-center">
+<span class="text-lg font-black text-primary">$4,200</span>
+<span class="text-xs text-on-surface-variant">Larnaca, CY</span>
+</div>
+</div>
+</div>
+<!-- Small Listing 2 -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm group">
+<div class="relative h-44">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="vibrant colored rooster and hens in a rustic farmyard setting with soft morning light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaeH-PbKJ3AG97EaRxgRlScg7PvXpD9gjBt-_scR8OVUgERg_NdBwvz5wWQE70UzWG4jlqhR6UFLxE1XJuvIkCXG4erwzSxlA1P2vEVjqtSTMuw0crfGQBDKHNT_tMMbTxw6VY59HjtsRbKqZjpfZ8Ne7w3zmAIEKftxBm9RFz4r1ykMbAidC24iXLzvhwwwcFMr8r_67y0XSDkFjTQ1c3WKfdim7t0smDoolut41SUIJvj3QsVcAzhZUM7L4xsxWCErk-4s7nYo0"/>
+</div>
+<div class="p-4">
+<h4 class="font-bold text-on-surface mb-1">Heritage Poultry Set</h4>
+<div class="flex justify-between items-center">
+<span class="text-lg font-black text-primary">$850</span>
+<span class="text-xs text-on-surface-variant">Normandy, FR</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Bottom (Small Squares) -->
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="relative h-56">
+<img class="w-full h-full object-cover" data-alt="herd of dairy cows grazing in a wide green field under a vast blue sky with fluffy white clouds" src="https://lh3.googleusercontent.com/aida-public/AB6AXuArF0hP7zZZd0vrXd88h1s1FSO12ho2Q7KUNPHAW23uRrOGKTRLXMTUOuYSeeoWr1mPWsPzBEk2Ydiwr8E-8y_lQZaee3GYJsP99IdqI4KVO45EB7ycgJXM6eQ2IXgG_fUr18Zm9Ht3LObkEtxUJeTENuF2_3KIWC0TLL1HGyz_26efF44KDrTEgrAXzdhtgJERuy0nFh9TUwkEaUuU6fO9RkttcESCB4RqBPCF4YT2A1xaazsEE0v9UH_KaHdZN2RPyiHtx_zfPNw"/>
+</div>
+<div class="p-4">
+<div class="text-[10px] font-black text-secondary tracking-widest mb-1 uppercase">Investment Opportunity</div>
+<h4 class="font-bold text-on-surface">Dairy Herd Expansion</h4>
+<span class="block text-primary font-black mt-2">$28,000</span>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="relative h-56">
+<img class="w-full h-full object-cover" data-alt="majestic friesian horse running in an open paddock with sunlight catching its mane and dark coat" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPHkp9pRDwAiGDtr5qyhem_8qRXV4IeK_zRu749EYyAdBfl7EfMTd13UG3S_VaQuAxUkWrQop8Oj-yRuAxoDQqOLa-w48IUuLXdSb4NMDSRD_K83QCfLAjTdR9JfP1e18NTgUhnniUsu8tjh2qtxWfWhtC69QmWuEVfL6sXJM9ugZszY4VoySYHPhxiYOHJzClsc_tPEkgce3BKctdoe8oBZZhF0UDbt59fb1g9tJcCsQhBmosbbajx4vHLOAQxHwtqlHL3tNgADw"/>
+</div>
+<div class="p-4">
+<div class="text-[10px] font-black text-tertiary tracking-widest mb-1 uppercase">Premium Equine</div>
+<h4 class="font-bold text-on-surface">Friesian Stallion</h4>
+<span class="block text-primary font-black mt-2">$15,500</span>
+</div>
+</div>
+<div class="md:col-span-4 bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm">
+<div class="relative h-56">
+<img class="w-full h-full object-cover" data-alt="cute piglets playing in a clean wooden pen with soft straw bedding and warm indoor lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDW9VZPEZl54dXnRo6kKJsegRLqqX8ypMiV7Ubaq48zc6lN50MuLoRNUDjYhPXQfC9JdxmjhtpCEPSmsJOZGKXCYTP7igHIX29cdZNcYrbt3lpQICmq_1bJ-eovPvJVKHPycDgHufdAmsw7VwIVsxEWod0eAwKKkpZ6-QJWz7g-UR-SjP0tbZF3KsmeCACbkpOQarKyFC4n3kKeK5Yg32HIPuoUW7CWe6CBbbRMyLrr4lunvnBFW2m2o4ss3ds30B9QpejDFiLH7bY"/>
+</div>
+<div class="p-4">
+<div class="text-[10px] font-black text-outline tracking-widest mb-1 uppercase">Direct from Farm</div>
+<h4 class="font-bold text-on-surface">Berkshire Piglets</h4>
+<span class="block text-primary font-black mt-2">$1,200 / unit</span>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-slate-50/90 dark:bg-slate-950/90 backdrop-blur-lg rounded-t-3xl shadow-[0_-4px_20px_0_rgba(11,27,52,0.06)] flex justify-around items-center px-4 pb-6 pt-2">
+<!-- Market (Active) -->
+<a class="flex flex-col items-center justify-center bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400 rounded-2xl px-3 py-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storefront</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Market</span>
+</a>
+<!-- Search -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-500 dark:hover:text-orange-300" href="#">
+<span class="material-symbols-outlined">search</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Search</span>
+</a>
+<!-- Add (List) - Visual FAB replacement -->
+<div class="relative -top-6">
+<button class="bg-primary hover:bg-primary-container text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-primary/30 transition-transform active:scale-90">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<span class="absolute -bottom-6 left-1/2 -translate-x-1/2 font-['Inter'] text-[10px] font-black uppercase tracking-tighter text-slate-400">List</span>
+</div>
+<!-- Chats -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-500 dark:hover:text-orange-300" href="#">
+<span class="material-symbols-outlined">chat_bubble</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Chats</span>
+</a>
+<!-- Stats -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 px-3 py-2 hover:text-orange-500 dark:hover:text-orange-300" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-tighter mt-1">Stats</span>
+</a>
+</nav>
+<!-- Content Separation Tonal Logic -->
+<div class="fixed inset-x-0 bottom-0 h-2 bg-slate-100 dark:bg-slate-900 pointer-events-none"></div>
+</body></html>

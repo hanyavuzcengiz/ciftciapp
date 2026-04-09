@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600;700;900&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#F04E23",
+              "background-light": "#f8f6f6",
+              "background-dark": "#221410",
+            },
+            fontFamily: {
+              "display": ["Work Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }</script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+<style>
+@keyframes scan {
+  0%, 100% { transform: translateY(-20%); }
+  50% { transform: translateY(120%); }
+}
+</style></head>
+<body class="bg-on-surface font-body text-on-surface-variant overflow-hidden">
+<!-- Top AppBar (Identity Suppression Rule applied: Non-shell transactional screen) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-center items-center px-6 h-20 bg-transparent">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-white" data-icon="shield_person">shield_person</span>
+<span class="font-headline font-black text-xl text-white tracking-widest uppercase">PASTORAL</span>
+</div>
+<button class="absolute right-6 w-10 h-10 flex items-center justify-center rounded-full bg-white/5 text-white hover:bg-white/10 transition-all border border-white/10">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</header>
+<main class="relative h-screen w-full flex flex-col items-center justify-center bg-slate-950 overflow-hidden">
+<!-- Background Blur/Texture for focus -->
+<div class="absolute inset-0 z-0 overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-b from-slate-900/50 via-slate-950/80 to-slate-950"></div>
+<div class="absolute -top-1/4 -right-1/4 w-96 h-96 bg-primary/20 blur-[120px] rounded-full"></div>
+<div class="absolute -bottom-1/4 -left-1/4 w-96 h-96 bg-tertiary/20 blur-[120px] rounded-full"></div>
+</div>
+<!-- Instruction Header -->
+<div class="relative z-10 text-center px-8 mb-12 max-w-md mx-auto">
+<h1 class="font-headline font-bold text-2xl md:text-3xl text-white leading-relaxed mb-4 tracking-tight">
+                Lütfen kafanızı yavaşça sağa ve sola çevirin
+            </h1>
+<p class="font-body text-slate-400 text-sm md:text-base">
+                Kimlik doğrulama işlemini tamamlamak için talimatları takip edin.
+            </p>
+</div>
+<!-- Central Biometric Area -->
+<div class="relative z-10 flex items-center justify-center">
+<!-- Progress Ring Container -->
+<div class="relative w-72 h-72 md:w-80 md:h-80 flex items-center justify-center">
+<svg class="absolute inset-0 w-full h-full" viewbox="0 0 100 100">
+<!-- Background Circle -->
+<circle class="text-white/5 stroke-current" cx="50" cy="50" fill="transparent" r="48" stroke-width="2"></circle>
+<!-- Progress Circle -->
+<circle class="text-[#F04E23] stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="48" stroke-linecap="round" stroke-width="3" style="stroke-dasharray: 301.59; stroke-dashoffset: 180;"></circle>
+</svg>
+<!-- Camera View (Mock) -->
+<div class="w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white/20 shadow-2xl relative ring-8 ring-[#F04E23]/10">
+<img alt="Face verification frame" class="w-full h-full object-cover grayscale brightness-110 contrast-125" data-alt="close up of a person's face centered in a circular frame looking forward with soft lighting and professional tech aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm9157YDCZjkEbPprHZkyNcXeRN3t09CsjO8_9RueWxhhgh8yxY4iGSUi9TgThe4eCl7ds3wYr-2oEgQQwilrZdffkNE4DpoHG1hhpTTeMCA6gsUGoucT_6XrLOmAh6QWGqkc0TNa_cs_NexCBIDB6Z0NotCTPsRKH-TmZwwr3FJ5A6fmT3f7IsVvW7qhTzm9weU6LRD3wO7jayuBdBtl-vnMXJjbMLNd21rWkO3jm8xK8p5F--WNU1nYg0rMsR4IsbvY3W3ccDC8"/>
+<!-- Scanning Overlay Effect -->
+<div class="absolute inset-0 pointer-events-none">
+<div class="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-[#F04E23]/30 to-transparent animate-[scan_2s_ease-in-out_infinite]"></div>
+<div class="absolute inset-0 border-[20px] border-slate-950/20"></div>
+</div>
+</div>
+<!-- Detection Guides -->
+<div class="absolute -inset-4 border-2 border-dashed border-white/5 rounded-full animate-pulse"></div>
+</div>
+</div>
+<!-- Status Messages -->
+<div class="relative z-10 mt-12 flex flex-col gap-4 items-center">
+<!-- Detected Badge -->
+<div class="flex items-center gap-3 px-6 py-2.5 bg-[#316b00]/20 border border-[#316b00]/30 rounded-full backdrop-blur-xl">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+<span class="text-[#a2f569] font-semibold text-sm tracking-wide uppercase">Yüz algılandı</span>
+</div>
+<!-- Action Status -->
+<div class="flex items-center gap-4 px-8 py-4 bg-white/5 rounded-2xl border border-white/10 shadow-2xl backdrop-blur-md">
+<span class="material-symbols-outlined text-[#F04E23]" data-icon="sync_alt">sync_alt</span>
+<span class="text-white font-medium text-sm">Hareket bekleniyor...</span>
+</div>
+</div>
+<!-- Help Link -->
+<div class="relative z-10 mt-auto pb-12 w-full flex justify-center">
+<button class="text-slate-400 hover:text-white transition-colors text-xs font-bold uppercase tracking-[0.2em] flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="help_outline">help_outline</span>
+                Nasıl çalışır?
+            </button>
+</div>
+</main>
+<!-- Visual Cues (Floating Icons for Editorial Asymmetry) -->
+<div class="fixed top-1/2 -left-8 -translate-y-1/2 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[120px] text-white" data-icon="fingerprint">fingerprint</span>
+</div>
+<div class="fixed bottom-1/4 -right-8 opacity-5 pointer-events-none">
+<span class="material-symbols-outlined text-[160px] text-white" data-icon="face">face</span>
+</div>
+</body></html>
