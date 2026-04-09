@@ -7,6 +7,10 @@ on:
         description: "Warn threshold for slow smoke checks (ms)"
         required: false
         default: "5000"
+      fail_on_slow_checks:
+        description: "Fail workflow if any smoke check exceeds slow_check_warn_ms"
+        required: false
+        default: "false"
       enable_metrics_smoke:
         description: "Run optional metrics smoke profile"
         required: false
@@ -104,6 +108,7 @@ jobs:
         if: always()
         env:
           SMOKE_SLOW_CHECK_WARN_MS: ${{ github.event.inputs.slow_check_warn_ms || '5000' }}
+          SMOKE_FAIL_ON_SLOW_CHECKS: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.fail_on_slow_checks == 'true' }}
           SMOKE_METRICS_ENABLED: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.enable_metrics_smoke != 'false' }}
         run: |
           node scripts/ci-smoke-summary.mjs
