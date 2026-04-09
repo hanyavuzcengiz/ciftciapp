@@ -7,6 +7,7 @@ import rateLimit from "express-rate-limit";
 import helmet from "helmet";
 import { createProxyMiddleware, fixRequestBody } from "http-proxy-middleware";
 import jwt from "jsonwebtoken";
+import { buildGatewayPrometheusMetrics } from "./metrics";
 import { resolveSecurityEnv } from "./securityConfig";
 
 /** gatewayRequestId: gateway girisinde atanir, tum proxylere x-request-id olarak iletilir */
@@ -259,22 +260,7 @@ if (String(process.env.GATEWAY_PROMETHEUS_METRICS ?? "").trim() === "1") {
     const uptime = process.uptime();
     const mem = process.memoryUsage();
     res.type("text/plain; version=0.0.4; charset=utf-8");
-    res.send(
-      [
-        "# HELP agromarket_api_gateway_uptime_seconds Seconds since the api-gateway Node process started.",
-        "# TYPE agromarket_api_gateway_uptime_seconds gauge",
-        `agromarket_api_gateway_uptime_seconds ${uptime.toFixed(3)}`,
-        "",
-        "# HELP agromarket_api_gateway_process_resident_memory_bytes Resident set size in bytes.",
-        "# TYPE agromarket_api_gateway_process_resident_memory_bytes gauge",
-        `agromarket_api_gateway_process_resident_memory_bytes ${Math.round(mem.rss)}`,
-        "",
-        "# HELP agromarket_api_gateway_process_heap_used_bytes V8 heap used in bytes.",
-        "# TYPE agromarket_api_gateway_process_heap_used_bytes gauge",
-        `agromarket_api_gateway_process_heap_used_bytes ${Math.round(mem.heapUsed)}`,
-        ""
-      ].join("\n")
-    );
+    res.send(buildGatewayPrometheusMetrics(uptime, { rss: mem.rss, heapUsed: mem.heapUsed }));
   });
 }
 
