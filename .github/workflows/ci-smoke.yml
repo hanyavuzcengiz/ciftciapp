@@ -23,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
 
       - name: Setup pnpm via Corepack
         run: |
@@ -42,6 +42,21 @@ jobs:
 
       - name: Start core infra
         run: pnpm docker:core
+
+      - name: Wait for PostgreSQL health
+        run: |
+          for i in {1..40}; do
+            cid="$(docker compose ps -q postgres)"
+            if [ -n "$cid" ] && [ "$(docker inspect --format='{{.State.Health.Status}}' "$cid")" = "healthy" ]; then
+              echo "postgres is healthy"
+              exit 0
+            fi
+            echo "waiting for postgres health... ($i/40)"
+            sleep 3
+          done
+          echo "postgres did not become healthy in time"
+          docker compose ps
+          exit 1
 
       - name: Run DB migrations
         run: pnpm db:migrate:all
