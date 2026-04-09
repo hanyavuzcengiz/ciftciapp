@@ -6,10 +6,10 @@ test("allows development in-memory runtime", () => {
   assert.doesNotThrow(() => validatePaymentRuntime("development", false));
 });
 
-test("blocks production in-memory runtime by default", () => {
-  assert.throws(() => validatePaymentRuntime("production", false), /persistent payment backend/);
+test("allows production runtime with persistent backend mode", () => {
+  assert.doesNotThrow(() => validatePaymentRuntime("production", false));
 });
 
-test("allows production only with explicit override", () => {
-  assert.doesNotThrow(() => validatePaymentRuntime("production", true));
+test("blocks production in-memory runtime override", () => {
+  assert.throws(() => validatePaymentRuntime("production", true), /persistent payment backend/);
 });

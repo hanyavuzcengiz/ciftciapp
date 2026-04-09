@@ -55,3 +55,10 @@
   - `.github/workflows/ci-smoke.yml`
 - For CI parsing:
   - `pnpm smoke:prod:json`
+
+## 8) Payment/PSP Go-Live Gates
+- Confirm `payment-service` production boot **fails** if `PAYMENT_ALLOW_INMEMORY=true` (no in-memory fallback in prod).
+- Enable and verify signed callback/webhook validation end-to-end (`REQUEST_SIGNING_SECRET` rotation plan included).
+- Verify idempotency strategy for `intent`, `confirm`, `refund` flows (same request id / provider id -> single financial outcome).
+- Ensure reconciliation source exists (provider settlement export or API) and daily mismatch alerting is defined.
+- Define operational limits: max retry attempts, timeout budget, and failure escalation path (on-call + incident channel).
