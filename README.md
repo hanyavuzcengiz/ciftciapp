@@ -57,6 +57,18 @@ Tek tek servis çalıştırmak için: `pnpm --filter @agromarket/api-gateway dev
 - `pnpm typecheck` — Turbo `typecheck` görevleri (CI’da da çalışır)
 - `pnpm test` — Jest (`user-service`) + diğer paketlerde no-op test stub
 - `pnpm build` — Turbo ile derleme
+- `pnpm verify` — smoke check-list doğrulama + lint + typecheck + test + build
+
+## Smoke / CI Smoke
+
+- Yerelde smoke: `pnpm smoke:prod` (metin), `pnpm smoke:prod:json` (JSON), `pnpm smoke:prod:verbose`
+- Sadece kontrol listesini doğrulama (ağsız): `pnpm smoke:validate-list`
+- Opsiyonel metrics smoke profili: `SMOKE_CHECK_METRICS=1 pnpm smoke:prod:json`
+- Gateway metrics endpoint'i opsiyoneldir: `GATEWAY_PROMETHEUS_METRICS=1` iken `GET /metrics` açılır
+- CI workflow: `.github/workflows/ci-smoke.yml`
+  - `workflow_dispatch` input `enable_metrics_smoke` (default `true`)
+  - `workflow_dispatch` input `slow_check_warn_ms` (default `5000`)
+  - Job summary'de: profil bazlı OK/failed/check sayısı, ilk hatalar (`hint` ile), en yavaş 3 check ve latency warning satırı
 
 ## Docker
 
