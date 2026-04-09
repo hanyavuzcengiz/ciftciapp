@@ -37,13 +37,20 @@ jobs:
       - name: Validate smoke checklist (no network)
         run: pnpm smoke:validate-list
 
+      - name: Smoke list preview for pull requests
+        if: github.event_name == 'pull_request'
+        run: pnpm smoke:prod:list:json
+
       - name: Prepare env
+        if: github.event_name == 'workflow_dispatch'
         run: cp .env.example .env
 
       - name: Start core infra
+        if: github.event_name == 'workflow_dispatch'
         run: pnpm docker:core
 
       - name: Wait for PostgreSQL health
+        if: github.event_name == 'workflow_dispatch'
         run: |
           for i in {1..40}; do
             cid="$(docker compose ps -q postgres)"
@@ -59,22 +66,26 @@ jobs:
           exit 1
 
       - name: Run listing DB migration for smoke
+        if: github.event_name == 'workflow_dispatch'
         run: pnpm db:listing:migrate
 
       - name: Start services in background
+        if: github.event_name == 'workflow_dispatch'
         run: nohup env GATEWAY_PROMETHEUS_METRICS=1 pnpm dev:services > /tmp/dev-services.log 2>&1 &
 
       - name: Wait services
+        if: github.event_name == 'workflow_dispatch'
         run: sleep 35
 
       # Istek: SMOKE_API_URL ile staging ortami (secret/variable); yoksa .env / NEXT_PUBLIC kullanilir
       - name: Smoke check (JSON)
+        if: github.event_name == 'workflow_dispatch'
         env:
           SMOKE_FETCH_TIMEOUT_MS: "60000"
         run: pnpm smoke:prod:json | tee /tmp/smoke-base.json
 
       - name: Smoke check metrics endpoint (optional profile)
-        if: github.event_name != 'workflow_dispatch' || github.event.inputs.enable_metrics_smoke != 'false'
+        if: github.event_name == 'workflow_dispatch' && github.event.inputs.enable_metrics_smoke != 'false'
         env:
           SMOKE_FETCH_TIMEOUT_MS: "60000"
           SMOKE_CHECK_METRICS: "1"
